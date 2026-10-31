@@ -664,6 +664,263 @@ arena_note = pn.pane.Markdown(
     "This interface does not send credentials to Arena until a dedicated Arena adapter is configured."
 )
 
+# Statistics graph dashboard (reads data/forest-blockchain.json)
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+BLOCKCHAIN_JSON_PATH = os.path.join(APP_DIR, "data", "forest-blockchain.json")
+
+def load_statistics_records():
+    """Read timber registrations from the project's data/forest-forest-blockchain.json file."""
+    json_path = BLOCKCHAIN_JSON_PATH
+
+    if not os.path.isfile(json_path):
+        return pd.DataFrame(), (
+            "Blockchain data file was not found. Expected location: "
+            f"{json_path}. Create a 'data' folder beside app.py and place "
+            "blockchain.json inside it."
+        )
+
+    try:
+        with open(json_path, "r", encoding="utf-8") as json_file:
+            payload = json.load(json_file)
+
+        rows = []
+
+        # Standard blockchain export: registrations are stored in block transactions.
+        chain_data = payload.get("chain", []) if isinstance(payload, dict) else []
+        for block in chain_data:
+            for transaction in block.get("transactions", []):
+                if transaction.get("type") != "TIMBER_REGISTERED":
+                    continue
+                record = transaction.get("data", {}) or {}
+                rows.append({
+                    "Grume ID": record.get("grumeId", transaction.get("grumeId", "")),
+                    "Essence": record.get("species", "Unknown") or "Unknown",
+                    "Origine": record.get("origin", "Unspecified") or "Unspecified",
+                    "Volume (m³)": record.get("volumeM3"),
+                    "Diamètre (cm)": record.get("diameterCm"),
+                    "Longueur (m)": record.get("lengthM"),
+                    "Date de récolte": record.get("harvestDate", ""),
+                    "Date d'enregistrement": record.get("registeredAt", transaction.get("timestamp", "")),
+                })
+
+        # Also support exports where timber records are stored in a top-level
+        # "timber" dictionary instead of (or in addition to) block transactions.
+        if not rows and isinstance(payload, dict) and isinstance(payload.get("timber"), dict):
+            for grume_id, record in payload["timber"].items():
+                record = record or {}
+                rows.append({
+                    "Grume ID": record.get("grumeId", grume_id),
+                    "Essence": record.get("species", "Unknown") or "Unknown",
+                    "Origine": record.get("origin", "Unspecified") or "Unspecified",
+                    "Volume (m³)": record.get("volumeM3"),
+                    "Diamètre (cm)": record.get("diameterCm"),
+                    "Longueur (m)": record.get("lengthM"),
+                    "Date de récolte": record.get("harvestDate", ""),
+                    "Date d'enregistrement": record.get("registeredAt", ""),
+                })
+
+        frame = pd.DataFrame(rows)
+        if frame.empty:
+            return frame, "The data/forest-forest-blockchain.json file contains no timber registration records."
+
+        for column in ["Volume (m³)", "Diamètre (cm)", "Longueur (m)"]:
+            frame[column] = pd.to_numeric(frame[column], errors="coerce")
+
+        frame["Date de récolte"] = pd.to_datetime(
+            frame["Date de récolte"], format="%d-%m-%Y", errors="coerce"
+        )
+        frame["Date d'enregistrement"] = pd.to_datetime(
+            frame["Date d'enregistrement"], errors="coerce", utc=True
+        ).dt.tz_convert(None)
+
+        return frame, None
+    except Exception as exc:
+        return pd.DataFrame(), f"Could not read data/forest-blockchain.json: {exc}"
+
+stats_data, stats_load_error = load_statistics_records()
+
+# Dropdown options are populated from the values present in blockchain.json.
+stats_essence_filter = pn.widgets.Select(
+    name="Essence",
+    options=["Toutes les essences"] + (
+        sorted(stats_data["Essence"].dropna().unique().tolist()) if not stats_data.empty else []
+    ),
+    value="Toutes les essences",
+    sizing_mode="stretch_width"
+)
+stats_origin_filter = pn.widgets.Select(
+    name="Origine",
+    options=["Toutes les origines"] + (
+        sorted(stats_data["Origine"].dropna().unique().tolist()) if not stats_data.empty else []
+    ),
+    value="Toutes les origines",
+    sizing_mode="stretch_width"
+)
+stats_refresh_btn = pn.widgets.Button(
+    name="Reload JSON data",
+    button_type="primary",
+    icon="refresh"
+)
+stats_message = pn.pane.Alert(
+    stats_load_error or f"Loaded {len(stats_data):,} timber registration records from data/forest-blockchain.json.",
+    alert_type="warning" if stats_load_error else "success"
+)
+stats_kpis = pn.Row(sizing_mode="stretch_width")
+stats_charts = pn.GridBox(ncols=2, sizing_mode="stretch_width", margin=10)
+
+def _filtered_statistics_data():
+    if stats_data.empty:
+        return stats_data.copy()
+    filtered = stats_data.copy()
+    if stats_essence_filter.value != "Toutes les essences":
+        filtered = filtered[filtered["Essence"] == stats_essence_filter.value]
+    if stats_origin_filter.value != "Toutes les origines":
+        filtered = filtered[filtered["Origine"] == stats_origin_filter.value]
+    return filtered
+
+def _statistics_card(title, plot):
+    return pn.Card(
+        plot,
+        title=title,
+        collapsed=False,
+        sizing_mode="stretch_width",
+        styles={"background": "#ffffff", "border": "1px solid #e5e7eb"}
+    )
+
+def render_statistics_dashboard(event=None):
+    global stats_data, stats_load_error
+
+    if event is not None and getattr(event, "obj", None) is stats_refresh_btn:
+        stats_data, stats_load_error = load_statistics_records()
+        stats_essence_filter.options = ["Toutes les essences"] + (
+            sorted(stats_data["Essence"].dropna().unique().tolist()) if not stats_data.empty else []
+        )
+        stats_origin_filter.options = ["Toutes les origines"] + (
+            sorted(stats_data["Origine"].dropna().unique().tolist()) if not stats_data.empty else []
+        )
+        stats_essence_filter.value = "Toutes les essences"
+        stats_origin_filter.value = "Toutes les origines"
+
+    if stats_load_error:
+        stats_message.object = stats_load_error
+        stats_message.alert_type = "danger"
+        stats_kpis.objects = []
+        stats_charts.objects = [pn.pane.Markdown("### Statistics are unavailable until the JSON file can be read.")]
+        return
+
+    frame = _filtered_statistics_data()
+    stats_message.object = (
+        f"Showing **{len(frame):,}** of **{len(stats_data):,}** registered timber records. "
+        "Use the Essence and Origine filters to update all charts."
+    )
+    stats_message.alert_type = "success"
+
+    total_volume = frame["Volume (m³)"].fillna(0).sum() if not frame.empty else 0
+    stats_kpis.objects = [
+        metric("Total Grumes", f"{len(frame):,}", "Filtered registrations"),
+        metric("Total volume", f"{total_volume:,.2f} m³", "Sum of registered volume"),
+        metric("Essences", frame["Essence"].nunique() if not frame.empty else 0, "Distinct species"),
+        metric("Origins", frame["Origine"].nunique() if not frame.empty else 0, "Distinct forest origins"),
+    ]
+
+    if frame.empty:
+        stats_charts.objects = [pn.pane.Markdown("### No records match the selected filters.")]
+        return
+
+    # Aggregate registrations by Essence for the bar chart.
+    essence_counts = (
+        frame.groupby("Essence").size()
+        .reset_index(name="Nombre de grumes")
+        .sort_values("Nombre de grumes", ascending=False)
+    )
+
+    # 1. Bar: number of grumes by Essence.
+    bar_plot = essence_counts.hvplot.bar(
+        x="Essence", y="Nombre de grumes", title="Bar – Number of Grumes by Essence",
+        height=330, rot=35, color="#16866f", tools=["hover", "pan", "wheel_zoom", "reset"],
+        responsive=True
+    )
+
+    # 2. Barh: total timber volume by Origine.
+    origin_volume = (
+        frame.groupby("Origine")["Volume (m³)"].sum()
+        .sort_values(ascending=True).reset_index()
+    )
+    barh_plot = origin_volume.hvplot.barh(
+        x="Volume (m³)", y="Origine", title="Barh – Total Volume by Origine",
+        height=330, color="#d97706", tools=["hover", "pan", "wheel_zoom", "reset"],
+        responsive=True
+    )
+
+    # 3. Scatter: diameter against volume, with Essence as the color group.
+    scatter_frame = frame.dropna(subset=["Diamètre (cm)", "Volume (m³)"])
+    scatter_plot = scatter_frame.hvplot.scatter(
+        x="Diamètre (cm)", y="Volume (m³)", by="Essence",
+        title="Scatter – Diameter vs Volume",
+        height=330, size=7, alpha=0.65, legend="right",
+        hover_cols=["Grume ID", "Origine", "Longueur (m)"],
+        tools=["hover", "pan", "wheel_zoom", "box_zoom", "reset", "save"],
+        responsive=True
+    )
+
+    # 4. Heatmap: registration counts by Origine and Essence.
+    heatmap_data = (
+        frame.groupby(["Origine", "Essence"]).size()
+        .reset_index(name="Nombre de grumes")
+    )
+    heatmap_plot = heatmap_data.hvplot.heatmap(
+        x="Essence", y="Origine", C="Nombre de grumes",
+        title="Heatmap – Grumes by Origine and Essence",
+        height=360, cmap="Viridis", colorbar=True,
+        tools=["hover", "pan", "wheel_zoom", "reset"], responsive=True
+    )
+
+    # 5. Histogram: distribution of timber volumes.
+    hist_values = frame.dropna(subset=["Volume (m³)"])
+    hist_plot = hist_values.hvplot.hist(
+        y="Volume (m³)", bins=25, title="Histogram – Timber Volume Distribution",
+        height=330, color="#0f766e", alpha=0.8,
+        tools=["hover", "pan", "wheel_zoom", "reset"], responsive=True
+    )
+
+    # 6. Line: number of timber harvests over time.
+    line_data = (
+        frame.dropna(subset=["Date de récolte"])
+        .groupby("Date de récolte").size()
+        .reset_index(name="Nombre de grumes")
+        .sort_values("Date de récolte")
+    )
+    line_plot = line_data.hvplot.line(
+        x="Date de récolte", y="Nombre de grumes",
+        title="Line – Timber Harvests Over Time",
+        height=330, color="#2563eb", line_width=2, marker="circle",
+        tools=["hover", "pan", "wheel_zoom", "box_zoom", "reset", "save"],
+        responsive=True
+    )
+
+    stats_charts.objects = [
+        _statistics_card("1. Bar chart", bar_plot),
+        _statistics_card("2. Horizontal bar chart", barh_plot),
+        _statistics_card("3. Scatter plot", scatter_plot),
+        _statistics_card("4. Heatmap", heatmap_plot),
+        _statistics_card("5. Histogram", hist_plot),
+        _statistics_card("6. Line chart", line_plot),
+    ]
+
+stats_essence_filter.param.watch(render_statistics_dashboard, "value")
+stats_origin_filter.param.watch(render_statistics_dashboard, "value")
+stats_refresh_btn.on_click(render_statistics_dashboard)
+
+statistics_view = pn.Column(
+    "## Statistics graph",
+    "Interactive timber registration analytics based on the blockchain JSON export.",
+    pn.Row(stats_essence_filter, stats_origin_filter, stats_refresh_btn, sizing_mode="stretch_width"),
+    stats_message,
+    stats_kpis,
+    stats_charts,
+    sizing_mode="stretch_width"
+)
+
 header = pn.Column(
     pn.Row(pn.pane.Markdown("# 🌳 Forest Traceability Blockchain", styles={"color":"white"}),
            pn.Spacer(), refresh_btn, sizing_mode="stretch_width"),
@@ -702,11 +959,22 @@ arena_view = pn.Column("## OpenForis Arena integration", arena_note, arena_url, 
 tabs = pn.Tabs(("Dashboard", dashboard), ("Register timber", register_view), ("Geolocalisation", geo_view),
                ("Record event", event_view), ("Traceability", history_view),
                ("Blockchain explorer", ledger_view), ("Arena integration", arena_view),
+               ("Statistics graph", statistics_view),
                dynamic=True, sizing_mode="stretch_both")
+
+statistics_menu_btn = pn.widgets.Button(
+    name="Statistics graph", button_type="primary", icon="chart-no-axes-combined",
+    sizing_mode="stretch_width"
+)
+def open_statistics_graph(event):
+    render_statistics_dashboard()
+    tabs.active = tabs.names.index("Statistics graph")
+statistics_menu_btn.on_click(open_statistics_graph)
 template = pn.template.FastListTemplate(
     title="Forest Traceability",
     sidebar=[pn.pane.Markdown("## Navigation"), pn.pane.Markdown(
         "Use the tabs to register timber, record events, inspect provenance and verify ledger integrity."),
+        statistics_menu_btn,
         pn.pane.Markdown("---"), pn.pane.Markdown("**Technology**\n\nPython Panel\n\nNode.js API\n\nSHA-256 blockchain")],
     main=[header, tabs],
     accent_base_color="#16866f", header_background="#102b26",
@@ -714,4 +982,5 @@ template = pn.template.FastListTemplate(
 )
 refresh_dashboard()
 refresh_geo_from_system()
+render_statistics_dashboard()
 template.servable()
