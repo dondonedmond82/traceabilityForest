@@ -121479,6 +121479,1514 @@
       "previousHash": "bfe4082cbb91b87e5a547c28f85d9391029227cb361510f6a40b9d018c8c3d93",
       "nonce": 0,
       "hash": "9cea995a02f0c58ea20621e48147d3d52f6caf30de673d011b815f9ad8a12cd7"
+    },
+    {
+      "index": 4673,
+      "timestamp": "2026-10-31T14:20:56.828Z",
+      "transactions": [
+        {
+          "id": "ceeb9be1-d851-4665-a36f-81ce067e05d8",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00676",
+          "timestamp": "2026-10-31T14:20:56.828Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00676",
+            "species": "Iroko",
+            "volumeM3": 5.154,
+            "diameterCm": 84,
+            "lengthM": 9.3,
+            "harvestDate": "23-03-2026",
+            "origin": "Lobaye",
+            "gps": "3.798090, 17.956690",
+            "registeredAt": "2026-10-31T14:20:56.828Z"
+          }
+        }
+      ],
+      "previousHash": "9cea995a02f0c58ea20621e48147d3d52f6caf30de673d011b815f9ad8a12cd7",
+      "nonce": 0,
+      "hash": "50bd00a93cb677dc0aed403ace27b5e1c77780a6cf0d25171b2052fddf4eb20c"
+    },
+    {
+      "index": 4674,
+      "timestamp": "2026-10-31T14:20:56.951Z",
+      "transactions": [
+        {
+          "id": "b3877449-3326-44d3-8b66-8aed37a08cc1",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00677",
+          "timestamp": "2026-10-31T14:20:56.951Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00677",
+            "species": "Akon",
+            "volumeM3": 5.969,
+            "diameterCm": 83.5,
+            "lengthM": 10.9,
+            "harvestDate": "24-06-2025",
+            "origin": "Nana-Mambéré",
+            "gps": "5.777324, 15.523096",
+            "registeredAt": "2026-10-31T14:20:56.951Z"
+          }
+        }
+      ],
+      "previousHash": "50bd00a93cb677dc0aed403ace27b5e1c77780a6cf0d25171b2052fddf4eb20c",
+      "nonce": 0,
+      "hash": "7f50c5c4cd19db7c07fb434528f3a40550a07df0358f62be07da94058c3295b3"
+    },
+    {
+      "index": 4675,
+      "timestamp": "2026-10-31T14:20:57.054Z",
+      "transactions": [
+        {
+          "id": "43c14fba-400e-42cb-8c76-98758d16382c",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00678",
+          "timestamp": "2026-10-31T14:20:57.054Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00678",
+            "species": "Iroko",
+            "volumeM3": 3.992,
+            "diameterCm": 102.9,
+            "lengthM": 4.8,
+            "harvestDate": "25-12-2025",
+            "origin": "Lobaye",
+            "gps": "3.852517, 17.920861",
+            "registeredAt": "2026-10-31T14:20:57.054Z"
+          }
+        }
+      ],
+      "previousHash": "7f50c5c4cd19db7c07fb434528f3a40550a07df0358f62be07da94058c3295b3",
+      "nonce": 0,
+      "hash": "3b3b9e1b9f9de60b343ce7a5cbc02d41e3fdfe89b9a2388f1b07a4e8e4d71a8d"
+    },
+    {
+      "index": 4676,
+      "timestamp": "2026-10-31T14:20:57.153Z",
+      "transactions": [
+        {
+          "id": "86c62afa-7ef9-4e64-bf41-0709a8ea3127",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00679",
+          "timestamp": "2026-10-31T14:20:57.153Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00679",
+            "species": "Sapelli",
+            "volumeM3": 5.536,
+            "diameterCm": 88.5,
+            "lengthM": 9,
+            "harvestDate": "26-05-2025",
+            "origin": "Lobaye",
+            "gps": "3.875841, 17.933055",
+            "registeredAt": "2026-10-31T14:20:57.153Z"
+          }
+        }
+      ],
+      "previousHash": "3b3b9e1b9f9de60b343ce7a5cbc02d41e3fdfe89b9a2388f1b07a4e8e4d71a8d",
+      "nonce": 0,
+      "hash": "c90fb5522e32bcb295c3aa78e29b9321df0015f3826ff5560998a250bf7e7010"
+    },
+    {
+      "index": 4677,
+      "timestamp": "2026-10-31T14:20:57.253Z",
+      "transactions": [
+        {
+          "id": "05cca459-1330-4880-9aa1-d2c35fbe5e69",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00680",
+          "timestamp": "2026-10-31T14:20:57.253Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00680",
+            "species": "Akon",
+            "volumeM3": 2.444,
+            "diameterCm": 50.5,
+            "lengthM": 12.2,
+            "harvestDate": "27-03-2026",
+            "origin": "Mambéré-Kadéï",
+            "gps": "4.158498, 15.373902",
+            "registeredAt": "2026-10-31T14:20:57.253Z"
+          }
+        }
+      ],
+      "previousHash": "c90fb5522e32bcb295c3aa78e29b9321df0015f3826ff5560998a250bf7e7010",
+      "nonce": 0,
+      "hash": "05a75f713399e2f7915c3a8bfae0d18b37b4544f1f64f257c8e65d65fb1014dd"
+    },
+    {
+      "index": 4678,
+      "timestamp": "2026-10-31T14:20:57.380Z",
+      "transactions": [
+        {
+          "id": "6c587730-738b-4a4c-9fdc-f3274f2269cb",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00681",
+          "timestamp": "2026-10-31T14:20:57.380Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00681",
+            "species": "Sapelli",
+            "volumeM3": 1.489,
+            "diameterCm": 59.8,
+            "lengthM": 5.3,
+            "harvestDate": "05-06-2026",
+            "origin": "Nana-Mambéré",
+            "gps": "5.804974, 15.540520",
+            "registeredAt": "2026-10-31T14:20:57.380Z"
+          }
+        }
+      ],
+      "previousHash": "05a75f713399e2f7915c3a8bfae0d18b37b4544f1f64f257c8e65d65fb1014dd",
+      "nonce": 0,
+      "hash": "beabd2087325f618abbbd7419799e2da5221c7201b54e45a6774916f19f6f060"
+    },
+    {
+      "index": 4679,
+      "timestamp": "2026-10-31T14:20:57.484Z",
+      "transactions": [
+        {
+          "id": "2e11cd41-8616-4a18-9b23-06ea2b6a0df8",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00682",
+          "timestamp": "2026-10-31T14:20:57.484Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00682",
+            "species": "Iroko",
+            "volumeM3": 2.1,
+            "diameterCm": 91.4,
+            "lengthM": 3.2,
+            "harvestDate": "26-09-2025",
+            "origin": "Ombella-M'Poko",
+            "gps": "4.507603, 18.182356",
+            "registeredAt": "2026-10-31T14:20:57.484Z"
+          }
+        }
+      ],
+      "previousHash": "beabd2087325f618abbbd7419799e2da5221c7201b54e45a6774916f19f6f060",
+      "nonce": 0,
+      "hash": "d08cfd2700c545e0085996e7fda2417c7aafc53f5864857152eb5f14a98d24ef"
+    },
+    {
+      "index": 4680,
+      "timestamp": "2026-10-31T14:20:57.605Z",
+      "transactions": [
+        {
+          "id": "8b7d9b91-c805-42cd-8064-eaef7068efc4",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00683",
+          "timestamp": "2026-10-31T14:20:57.605Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00683",
+            "species": "Iroko",
+            "volumeM3": 0.573,
+            "diameterCm": 42.7,
+            "lengthM": 4,
+            "harvestDate": "30-11-2025",
+            "origin": "Sangha-Mbaéré",
+            "gps": "3.637310, 16.115573",
+            "registeredAt": "2026-10-31T14:20:57.605Z"
+          }
+        }
+      ],
+      "previousHash": "d08cfd2700c545e0085996e7fda2417c7aafc53f5864857152eb5f14a98d24ef",
+      "nonce": 0,
+      "hash": "7c0ea610055a0182b281ba260d0d5b8bd891aca8c515c7be845cd5c733854fac"
+    },
+    {
+      "index": 4681,
+      "timestamp": "2026-10-31T14:20:57.780Z",
+      "transactions": [
+        {
+          "id": "d0549a0c-1429-4e10-bdb8-af2be96e8d18",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00684",
+          "timestamp": "2026-10-31T14:20:57.780Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00684",
+            "species": "Ayous",
+            "volumeM3": 5.749,
+            "diameterCm": 84.3,
+            "lengthM": 10.3,
+            "harvestDate": "01-08-2025",
+            "origin": "Mambéré-Kadéï",
+            "gps": "4.140625, 15.293611",
+            "registeredAt": "2026-10-31T14:20:57.780Z"
+          }
+        }
+      ],
+      "previousHash": "7c0ea610055a0182b281ba260d0d5b8bd891aca8c515c7be845cd5c733854fac",
+      "nonce": 0,
+      "hash": "e42dd9dce0ec81fe2994ab7ab664937c2b0f7c3a0ccb5df616d33901d64db40b"
+    },
+    {
+      "index": 4682,
+      "timestamp": "2026-10-31T14:20:57.932Z",
+      "transactions": [
+        {
+          "id": "4899f698-67fb-4023-b099-b17a3f638b83",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00685",
+          "timestamp": "2026-10-31T14:20:57.932Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00685",
+            "species": "Akon",
+            "volumeM3": 1.557,
+            "diameterCm": 47.2,
+            "lengthM": 8.9,
+            "harvestDate": "26-05-2025",
+            "origin": "Sangha-Mbaéré",
+            "gps": "3.694974, 16.078109",
+            "registeredAt": "2026-10-31T14:20:57.932Z"
+          }
+        }
+      ],
+      "previousHash": "e42dd9dce0ec81fe2994ab7ab664937c2b0f7c3a0ccb5df616d33901d64db40b",
+      "nonce": 0,
+      "hash": "1932c5d9a052497c54325103cb1e165e4fb34588a973e77d03934b10f8973b48"
+    },
+    {
+      "index": 4683,
+      "timestamp": "2026-10-31T14:20:58.061Z",
+      "transactions": [
+        {
+          "id": "cba8d98a-1361-403a-bdfe-287f15abc7a0",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00686",
+          "timestamp": "2026-10-31T14:20:58.061Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00686",
+            "species": "Sipo",
+            "volumeM3": 1.562,
+            "diameterCm": 51.5,
+            "lengthM": 7.5,
+            "harvestDate": "10-09-2026",
+            "origin": "Nana-Mambéré",
+            "gps": "5.783375, 15.555359",
+            "registeredAt": "2026-10-31T14:20:58.061Z"
+          }
+        }
+      ],
+      "previousHash": "1932c5d9a052497c54325103cb1e165e4fb34588a973e77d03934b10f8973b48",
+      "nonce": 0,
+      "hash": "28437c59f26e80e6c0036eec23a7fd19d37154af7551a5bbc167d9bf335236ad"
+    },
+    {
+      "index": 4684,
+      "timestamp": "2026-10-31T14:20:58.184Z",
+      "transactions": [
+        {
+          "id": "19202162-6f69-4c50-91ba-0d3d43d8ba7d",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00687",
+          "timestamp": "2026-10-31T14:20:58.184Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00687",
+            "species": "Akon",
+            "volumeM3": 3.344,
+            "diameterCm": 72.5,
+            "lengthM": 8.1,
+            "harvestDate": "24-01-2025",
+            "origin": "Berberati",
+            "gps": "4.301352, 15.832590",
+            "registeredAt": "2026-10-31T14:20:58.184Z"
+          }
+        }
+      ],
+      "previousHash": "28437c59f26e80e6c0036eec23a7fd19d37154af7551a5bbc167d9bf335236ad",
+      "nonce": 0,
+      "hash": "b1674d70cf64a67117c6ce45f70b5bdcf672d2b3ed8acb9d9cb1bc867bab71a0"
+    },
+    {
+      "index": 4685,
+      "timestamp": "2026-10-31T14:20:58.292Z",
+      "transactions": [
+        {
+          "id": "49b6e8cb-fc15-4524-88a9-764cc7407836",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00688",
+          "timestamp": "2026-10-31T14:20:58.292Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00688",
+            "species": "Sapelli",
+            "volumeM3": 2.438,
+            "diameterCm": 88.1,
+            "lengthM": 4,
+            "harvestDate": "29-05-2026",
+            "origin": "Sangha-Mbaéré",
+            "gps": "3.674823, 15.996999",
+            "registeredAt": "2026-10-31T14:20:58.292Z"
+          }
+        }
+      ],
+      "previousHash": "b1674d70cf64a67117c6ce45f70b5bdcf672d2b3ed8acb9d9cb1bc867bab71a0",
+      "nonce": 0,
+      "hash": "55038a1c12531f33d0c940b9f16aa540963c47d91a48590c69dc02452d27890f"
+    },
+    {
+      "index": 4686,
+      "timestamp": "2026-10-31T14:20:58.404Z",
+      "transactions": [
+        {
+          "id": "0dcb288d-62f2-4744-b9c9-82ee4e0feb8f",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00689",
+          "timestamp": "2026-10-31T14:20:58.404Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00689",
+            "species": "Sapelli",
+            "volumeM3": 2.182,
+            "diameterCm": 51.2,
+            "lengthM": 10.6,
+            "harvestDate": "17-08-2025",
+            "origin": "Mambéré-Kadéï",
+            "gps": "4.141233, 15.290149",
+            "registeredAt": "2026-10-31T14:20:58.404Z"
+          }
+        }
+      ],
+      "previousHash": "55038a1c12531f33d0c940b9f16aa540963c47d91a48590c69dc02452d27890f",
+      "nonce": 0,
+      "hash": "1076f4a2ffeaba68d0909a5f6d25ca8d4aaf3179f919c17f75587e7e675cc83b"
+    },
+    {
+      "index": 4687,
+      "timestamp": "2026-10-31T14:20:58.514Z",
+      "transactions": [
+        {
+          "id": "0a97b586-51d3-4be7-8759-bb8e24dd381a",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00690",
+          "timestamp": "2026-10-31T14:20:58.514Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00690",
+            "species": "Sapelli",
+            "volumeM3": 1.633,
+            "diameterCm": 42.9,
+            "lengthM": 11.3,
+            "harvestDate": "07-05-2026",
+            "origin": "Mambéré-Kadéï",
+            "gps": "4.155729, 15.313442",
+            "registeredAt": "2026-10-31T14:20:58.514Z"
+          }
+        }
+      ],
+      "previousHash": "1076f4a2ffeaba68d0909a5f6d25ca8d4aaf3179f919c17f75587e7e675cc83b",
+      "nonce": 0,
+      "hash": "23d719c8c9d30d32273424dfbec93826b18c9089e1701546e23ca198a5e9a101"
+    },
+    {
+      "index": 4688,
+      "timestamp": "2026-10-31T14:20:58.635Z",
+      "transactions": [
+        {
+          "id": "efa87a72-96bb-4dd0-b916-793d8b766407",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00691",
+          "timestamp": "2026-10-31T14:20:58.635Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00691",
+            "species": "Sapelli",
+            "volumeM3": 1.609,
+            "diameterCm": 74.4,
+            "lengthM": 3.7,
+            "harvestDate": "07-06-2026",
+            "origin": "Ombella-M'Poko",
+            "gps": "4.609849, 18.170420",
+            "registeredAt": "2026-10-31T14:20:58.635Z"
+          }
+        }
+      ],
+      "previousHash": "23d719c8c9d30d32273424dfbec93826b18c9089e1701546e23ca198a5e9a101",
+      "nonce": 0,
+      "hash": "a6df47f06a4e2a733e130900d6b13d3b61489ad6225b2eff36ba2f86f50381a3"
+    },
+    {
+      "index": 4689,
+      "timestamp": "2026-10-31T14:20:58.740Z",
+      "transactions": [
+        {
+          "id": "a8d844e6-ba06-4d7b-a332-72129428824b",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00692",
+          "timestamp": "2026-10-31T14:20:58.740Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00692",
+            "species": "Akon",
+            "volumeM3": 1.598,
+            "diameterCm": 45.8,
+            "lengthM": 9.7,
+            "harvestDate": "03-08-2026",
+            "origin": "Mambéré-Kadéï",
+            "gps": "4.164565, 15.293440",
+            "registeredAt": "2026-10-31T14:20:58.740Z"
+          }
+        }
+      ],
+      "previousHash": "a6df47f06a4e2a733e130900d6b13d3b61489ad6225b2eff36ba2f86f50381a3",
+      "nonce": 0,
+      "hash": "9b53f0fd852608ba904f0690c75326af7d303bd75b672e6edb8bcaffdb17ef50"
+    },
+    {
+      "index": 4690,
+      "timestamp": "2026-10-31T14:20:59.017Z",
+      "transactions": [
+        {
+          "id": "20ed1243-b95a-49ad-a9d2-5981f853036a",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00694",
+          "timestamp": "2026-10-31T14:20:59.017Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00694",
+            "species": "Akon",
+            "volumeM3": 1.031,
+            "diameterCm": 35.7,
+            "lengthM": 10.3,
+            "harvestDate": "31-03-2025",
+            "origin": "Mambéré-Kadéï",
+            "gps": "4.090133, 15.327119",
+            "registeredAt": "2026-10-31T14:20:59.017Z"
+          }
+        }
+      ],
+      "previousHash": "9b53f0fd852608ba904f0690c75326af7d303bd75b672e6edb8bcaffdb17ef50",
+      "nonce": 0,
+      "hash": "7570e59961ae125751443c88ee7a64fa378d5523a8555097b232480b2b911616"
+    },
+    {
+      "index": 4691,
+      "timestamp": "2026-10-31T14:20:59.121Z",
+      "transactions": [
+        {
+          "id": "acdbbab1-7dfe-40fc-a52f-0ee67aacb9e7",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00695",
+          "timestamp": "2026-10-31T14:20:59.121Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00695",
+            "species": "Akon",
+            "volumeM3": 2.882,
+            "diameterCm": 72.4,
+            "lengthM": 7,
+            "harvestDate": "11-10-2025",
+            "origin": "Nana-Mambéré",
+            "gps": "5.771934, 15.520808",
+            "registeredAt": "2026-10-31T14:20:59.121Z"
+          }
+        }
+      ],
+      "previousHash": "7570e59961ae125751443c88ee7a64fa378d5523a8555097b232480b2b911616",
+      "nonce": 0,
+      "hash": "5735087782712c835d64ee0e9b22cfa844c60fd641198e8ed6fdf4896a9358fb"
+    },
+    {
+      "index": 4692,
+      "timestamp": "2026-10-31T14:20:59.236Z",
+      "transactions": [
+        {
+          "id": "11edff3e-1fea-4ff7-b99d-e241650895f0",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00696",
+          "timestamp": "2026-10-31T14:20:59.236Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00696",
+            "species": "Iroko",
+            "volumeM3": 5.148,
+            "diameterCm": 87.3,
+            "lengthM": 8.6,
+            "harvestDate": "20-01-2026",
+            "origin": "Sangha-Mbaéré",
+            "gps": "3.637132, 16.012501",
+            "registeredAt": "2026-10-31T14:20:59.236Z"
+          }
+        }
+      ],
+      "previousHash": "5735087782712c835d64ee0e9b22cfa844c60fd641198e8ed6fdf4896a9358fb",
+      "nonce": 0,
+      "hash": "9f6248142266eeda1957108b4f29b7b02dd820ae689ce0e53da7e1bcf3b294ac"
+    },
+    {
+      "index": 4693,
+      "timestamp": "2026-10-31T14:20:59.347Z",
+      "transactions": [
+        {
+          "id": "1009fc90-4d36-4959-ba11-3bd20856d551",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00697",
+          "timestamp": "2026-10-31T14:20:59.347Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00697",
+            "species": "Fraké",
+            "volumeM3": 1.561,
+            "diameterCm": 47,
+            "lengthM": 9,
+            "harvestDate": "01-04-2025",
+            "origin": "Nana-Mambéré",
+            "gps": "5.691770, 15.564540",
+            "registeredAt": "2026-10-31T14:20:59.347Z"
+          }
+        }
+      ],
+      "previousHash": "9f6248142266eeda1957108b4f29b7b02dd820ae689ce0e53da7e1bcf3b294ac",
+      "nonce": 0,
+      "hash": "b488598741e95e57a077847cb8217a93d04de36289e778c03a0c91f3bf9356e4"
+    },
+    {
+      "index": 4694,
+      "timestamp": "2026-10-31T14:20:59.461Z",
+      "transactions": [
+        {
+          "id": "a731ac07-ac3e-4a15-8cc4-5f377e293f4d",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00698",
+          "timestamp": "2026-10-31T14:20:59.461Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00698",
+            "species": "Ayous",
+            "volumeM3": 0.672,
+            "diameterCm": 51.7,
+            "lengthM": 3.2,
+            "harvestDate": "21-01-2026",
+            "origin": "Lobaye",
+            "gps": "3.809179, 17.874080",
+            "registeredAt": "2026-10-31T14:20:59.461Z"
+          }
+        }
+      ],
+      "previousHash": "b488598741e95e57a077847cb8217a93d04de36289e778c03a0c91f3bf9356e4",
+      "nonce": 0,
+      "hash": "4b2c28d18651337639105ba62112809c8290f1638f8fa5b6eddb51e41eb71434"
+    },
+    {
+      "index": 4695,
+      "timestamp": "2026-10-31T14:20:59.581Z",
+      "transactions": [
+        {
+          "id": "2ae39d26-ed87-4679-b193-539f31b931c6",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00699",
+          "timestamp": "2026-10-31T14:20:59.581Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00699",
+            "species": "Ayous",
+            "volumeM3": 5.064,
+            "diameterCm": 98.1,
+            "lengthM": 6.7,
+            "harvestDate": "15-03-2025",
+            "origin": "Mambéré-Kadéï",
+            "gps": "4.138914, 15.367917",
+            "registeredAt": "2026-10-31T14:20:59.581Z"
+          }
+        }
+      ],
+      "previousHash": "4b2c28d18651337639105ba62112809c8290f1638f8fa5b6eddb51e41eb71434",
+      "nonce": 0,
+      "hash": "7f8a0a9a736886217e63ed3436fa37b02e809db8bfa330238871f9e101f95b71"
+    },
+    {
+      "index": 4696,
+      "timestamp": "2026-10-31T14:20:59.729Z",
+      "transactions": [
+        {
+          "id": "89d33edb-b9e1-4cd9-8979-531004f0d418",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00700",
+          "timestamp": "2026-10-31T14:20:59.729Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00700",
+            "species": "Akon",
+            "volumeM3": 2.371,
+            "diameterCm": 65.2,
+            "lengthM": 7.1,
+            "harvestDate": "07-06-2025",
+            "origin": "Nana-Mambéré",
+            "gps": "5.726088, 15.541375",
+            "registeredAt": "2026-10-31T14:20:59.728Z"
+          }
+        }
+      ],
+      "previousHash": "7f8a0a9a736886217e63ed3436fa37b02e809db8bfa330238871f9e101f95b71",
+      "nonce": 0,
+      "hash": "bb8b26b821ad88bf9de31e14f26c59791ee445249f3434699bf633a753b2165a"
+    },
+    {
+      "index": 4697,
+      "timestamp": "2026-10-31T14:20:59.827Z",
+      "transactions": [
+        {
+          "id": "3a6e27e4-ad74-423f-adf8-f6eebe05d6f1",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00701",
+          "timestamp": "2026-10-31T14:20:59.827Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00701",
+            "species": "Akon",
+            "volumeM3": 1.853,
+            "diameterCm": 66.1,
+            "lengthM": 5.4,
+            "harvestDate": "24-10-2025",
+            "origin": "Berberati",
+            "gps": "4.277445, 15.729243",
+            "registeredAt": "2026-10-31T14:20:59.827Z"
+          }
+        }
+      ],
+      "previousHash": "bb8b26b821ad88bf9de31e14f26c59791ee445249f3434699bf633a753b2165a",
+      "nonce": 0,
+      "hash": "f18887f6c7d3b3865bcb56dd54d3c0590fe96b067e5d7bc207ee071a8e9dee53"
+    },
+    {
+      "index": 4698,
+      "timestamp": "2026-10-31T14:20:59.932Z",
+      "transactions": [
+        {
+          "id": "0c646046-7942-4f76-b490-757af1169051",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00702",
+          "timestamp": "2026-10-31T14:20:59.932Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00702",
+            "species": "Sapelli",
+            "volumeM3": 2.946,
+            "diameterCm": 69.8,
+            "lengthM": 7.7,
+            "harvestDate": "20-06-2026",
+            "origin": "Ombella-M'Poko",
+            "gps": "4.527314, 18.190561",
+            "registeredAt": "2026-10-31T14:20:59.932Z"
+          }
+        }
+      ],
+      "previousHash": "f18887f6c7d3b3865bcb56dd54d3c0590fe96b067e5d7bc207ee071a8e9dee53",
+      "nonce": 0,
+      "hash": "bf09b88a91a129582e35f14bc5cda674ac004f23615ce028fb62e095c6d4ad11"
+    },
+    {
+      "index": 4699,
+      "timestamp": "2026-10-31T14:21:00.077Z",
+      "transactions": [
+        {
+          "id": "ca9800e1-b46c-440b-b78d-f6b035b38564",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00703",
+          "timestamp": "2026-10-31T14:21:00.077Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00703",
+            "species": "Iroko",
+            "volumeM3": 3.658,
+            "diameterCm": 105.3,
+            "lengthM": 4.2,
+            "harvestDate": "28-09-2026",
+            "origin": "Nana-Mambéré",
+            "gps": "5.737326, 15.565483",
+            "registeredAt": "2026-10-31T14:21:00.077Z"
+          }
+        }
+      ],
+      "previousHash": "bf09b88a91a129582e35f14bc5cda674ac004f23615ce028fb62e095c6d4ad11",
+      "nonce": 0,
+      "hash": "6311aae0ff225fe2fae908bb722f482ebe54e0def7e38d0e4853f1bc43a9dc8e"
+    },
+    {
+      "index": 4700,
+      "timestamp": "2026-10-31T14:21:00.208Z",
+      "transactions": [
+        {
+          "id": "6e54134b-3b9d-4b6d-a53d-d6aadaf3e92e",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00704",
+          "timestamp": "2026-10-31T14:21:00.208Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00704",
+            "species": "Sipo",
+            "volumeM3": 6.474,
+            "diameterCm": 84.3,
+            "lengthM": 11.6,
+            "harvestDate": "11-08-2026",
+            "origin": "Sangha-Mbaéré",
+            "gps": "3.686158, 16.050527",
+            "registeredAt": "2026-10-31T14:21:00.208Z"
+          }
+        }
+      ],
+      "previousHash": "6311aae0ff225fe2fae908bb722f482ebe54e0def7e38d0e4853f1bc43a9dc8e",
+      "nonce": 0,
+      "hash": "6721b2d822e06ff0e2d7a075721fc2085d9dbc49b30a900a536b6d8cb27914ad"
+    },
+    {
+      "index": 4701,
+      "timestamp": "2026-10-31T14:21:00.348Z",
+      "transactions": [
+        {
+          "id": "ac53b065-ae3e-4a62-bf5d-bebd5bc0c988",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00705",
+          "timestamp": "2026-10-31T14:21:00.348Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00705",
+            "species": "Sipo",
+            "volumeM3": 0.499,
+            "diameterCm": 42,
+            "lengthM": 3.6,
+            "harvestDate": "02-03-2025",
+            "origin": "Lobaye",
+            "gps": "3.844879, 17.949227",
+            "registeredAt": "2026-10-31T14:21:00.348Z"
+          }
+        }
+      ],
+      "previousHash": "6721b2d822e06ff0e2d7a075721fc2085d9dbc49b30a900a536b6d8cb27914ad",
+      "nonce": 0,
+      "hash": "3896dbbefc07af3eb8ba3c7c925fc9775cf8556bb8303fc3fe01d7ccd5dfc7dc"
+    },
+    {
+      "index": 4702,
+      "timestamp": "2026-10-31T14:21:00.472Z",
+      "transactions": [
+        {
+          "id": "c0bc91cb-5c6d-4c2e-8991-a819b19e1b51",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00706",
+          "timestamp": "2026-10-31T14:21:00.471Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00706",
+            "species": "Sipo",
+            "volumeM3": 1.082,
+            "diameterCm": 50.5,
+            "lengthM": 5.4,
+            "harvestDate": "19-03-2026",
+            "origin": "Nana-Mambéré",
+            "gps": "5.760014, 15.505401",
+            "registeredAt": "2026-10-31T14:21:00.471Z"
+          }
+        }
+      ],
+      "previousHash": "3896dbbefc07af3eb8ba3c7c925fc9775cf8556bb8303fc3fe01d7ccd5dfc7dc",
+      "nonce": 0,
+      "hash": "f67bfd2875953a648af3c4ffbf0f80736dc60aa82d052e5fb9dad1639eafecf0"
+    },
+    {
+      "index": 4703,
+      "timestamp": "2026-10-31T14:21:00.584Z",
+      "transactions": [
+        {
+          "id": "3cec2c27-016c-4cd9-9886-3039ee515972",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00707",
+          "timestamp": "2026-10-31T14:21:00.584Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00707",
+            "species": "Sipo",
+            "volumeM3": 4.608,
+            "diameterCm": 72.7,
+            "lengthM": 11.1,
+            "harvestDate": "04-05-2026",
+            "origin": "Mambéré-Kadéï",
+            "gps": "4.176795, 15.232541",
+            "registeredAt": "2026-10-31T14:21:00.584Z"
+          }
+        }
+      ],
+      "previousHash": "f67bfd2875953a648af3c4ffbf0f80736dc60aa82d052e5fb9dad1639eafecf0",
+      "nonce": 0,
+      "hash": "3ed6a966f6aaeca28fad64edc4b8561412c2dfc1aaaa9f91fca23f68b9c25fe9"
+    },
+    {
+      "index": 4704,
+      "timestamp": "2026-10-31T14:21:00.715Z",
+      "transactions": [
+        {
+          "id": "b4e3f34e-1bcc-4705-bc3e-99711ce7c7a2",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00708",
+          "timestamp": "2026-10-31T14:21:00.715Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00708",
+            "species": "Ayous",
+            "volumeM3": 3.705,
+            "diameterCm": 72.4,
+            "lengthM": 9,
+            "harvestDate": "25-10-2025",
+            "origin": "Ombella-M'Poko",
+            "gps": "4.601815, 18.151549",
+            "registeredAt": "2026-10-31T14:21:00.715Z"
+          }
+        }
+      ],
+      "previousHash": "3ed6a966f6aaeca28fad64edc4b8561412c2dfc1aaaa9f91fca23f68b9c25fe9",
+      "nonce": 0,
+      "hash": "b5f05ef8c171922ee11edef48bdeb00c78566f2e5afab8c15e882ab465980427"
+    },
+    {
+      "index": 4705,
+      "timestamp": "2026-10-31T14:21:00.940Z",
+      "transactions": [
+        {
+          "id": "218cadcb-9af2-4703-87dc-47ec36051c10",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00709",
+          "timestamp": "2026-10-31T14:21:00.940Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00709",
+            "species": "Akon",
+            "volumeM3": 6.632,
+            "diameterCm": 102.1,
+            "lengthM": 8.1,
+            "harvestDate": "04-07-2025",
+            "origin": "Berberati",
+            "gps": "4.253926, 15.799291",
+            "registeredAt": "2026-10-31T14:21:00.940Z"
+          }
+        }
+      ],
+      "previousHash": "b5f05ef8c171922ee11edef48bdeb00c78566f2e5afab8c15e882ab465980427",
+      "nonce": 0,
+      "hash": "e7f9869498450299fd4f7fb641b1e269e911327a2b507e1af749ec6db619181f"
+    },
+    {
+      "index": 4706,
+      "timestamp": "2026-10-31T14:21:01.097Z",
+      "transactions": [
+        {
+          "id": "95725787-ba3d-4d82-befb-db7dfb2f687a",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00710",
+          "timestamp": "2026-10-31T14:21:01.097Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00710",
+            "species": "Akon",
+            "volumeM3": 6.358,
+            "diameterCm": 83.9,
+            "lengthM": 11.5,
+            "harvestDate": "11-11-2025",
+            "origin": "Mambéré-Kadéï",
+            "gps": "4.176711, 15.314495",
+            "registeredAt": "2026-10-31T14:21:01.097Z"
+          }
+        }
+      ],
+      "previousHash": "e7f9869498450299fd4f7fb641b1e269e911327a2b507e1af749ec6db619181f",
+      "nonce": 0,
+      "hash": "617000a648910ca99ced768d4d20837647a31b53c7b0a81206435cb3cb0d59e7"
+    },
+    {
+      "index": 4707,
+      "timestamp": "2026-10-31T14:21:01.256Z",
+      "transactions": [
+        {
+          "id": "7abe4269-e63a-4f72-8c59-5ef6fbeee289",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00711",
+          "timestamp": "2026-10-31T14:21:01.256Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00711",
+            "species": "Sapelli",
+            "volumeM3": 4.019,
+            "diameterCm": 82.6,
+            "lengthM": 7.5,
+            "harvestDate": "11-02-2025",
+            "origin": "Nana-Mambéré",
+            "gps": "5.747937, 15.536915",
+            "registeredAt": "2026-10-31T14:21:01.256Z"
+          }
+        }
+      ],
+      "previousHash": "617000a648910ca99ced768d4d20837647a31b53c7b0a81206435cb3cb0d59e7",
+      "nonce": 0,
+      "hash": "d6135c2558cd18dae12496acc2ecb03053a590c749687af1a1401f1b621e294e"
+    },
+    {
+      "index": 4708,
+      "timestamp": "2026-10-31T14:21:01.394Z",
+      "transactions": [
+        {
+          "id": "b8f9b0ad-4368-40b8-923b-993340b391b1",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00712",
+          "timestamp": "2026-10-31T14:21:01.394Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00712",
+            "species": "Sapelli",
+            "volumeM3": 3.36,
+            "diameterCm": 92.5,
+            "lengthM": 5,
+            "harvestDate": "23-02-2026",
+            "origin": "Lobaye",
+            "gps": "3.855410, 17.984351",
+            "registeredAt": "2026-10-31T14:21:01.394Z"
+          }
+        }
+      ],
+      "previousHash": "d6135c2558cd18dae12496acc2ecb03053a590c749687af1a1401f1b621e294e",
+      "nonce": 0,
+      "hash": "49ecfdd035745847372a1ebd76ef646be5bb3846877cd1ae471fac173b1a115f"
+    },
+    {
+      "index": 4709,
+      "timestamp": "2026-10-31T14:21:01.528Z",
+      "transactions": [
+        {
+          "id": "f1693966-a09e-4bf5-9859-81c62e84199c",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00713",
+          "timestamp": "2026-10-31T14:21:01.528Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00713",
+            "species": "Akon",
+            "volumeM3": 2.267,
+            "diameterCm": 74.5,
+            "lengthM": 5.2,
+            "harvestDate": "03-01-2026",
+            "origin": "Berberati",
+            "gps": "4.301406, 15.751586",
+            "registeredAt": "2026-10-31T14:21:01.528Z"
+          }
+        }
+      ],
+      "previousHash": "49ecfdd035745847372a1ebd76ef646be5bb3846877cd1ae471fac173b1a115f",
+      "nonce": 0,
+      "hash": "c6e8a367129ba704d59cd8784ccce0dbfdc58dbd05f39e34bc91d4c278a8b358"
+    },
+    {
+      "index": 4710,
+      "timestamp": "2026-10-31T14:21:01.657Z",
+      "transactions": [
+        {
+          "id": "e4c592b2-53d0-4c1a-84c6-7e5032bd5a97",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00714",
+          "timestamp": "2026-10-31T14:21:01.657Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00714",
+            "species": "Akon",
+            "volumeM3": 0.562,
+            "diameterCm": 44.6,
+            "lengthM": 3.6,
+            "harvestDate": "15-08-2026",
+            "origin": "Ombella-M'Poko",
+            "gps": "4.521619, 18.174171",
+            "registeredAt": "2026-10-31T14:21:01.657Z"
+          }
+        }
+      ],
+      "previousHash": "c6e8a367129ba704d59cd8784ccce0dbfdc58dbd05f39e34bc91d4c278a8b358",
+      "nonce": 0,
+      "hash": "1bd0cbe075860079c693b15f73db34ce4a2159cc4cf9e4752e8f2933c3db2046"
+    },
+    {
+      "index": 4711,
+      "timestamp": "2026-10-31T14:21:01.782Z",
+      "transactions": [
+        {
+          "id": "86a46041-c0e2-4c26-8b97-f86d888de3e1",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00715",
+          "timestamp": "2026-10-31T14:21:01.782Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00715",
+            "species": "Iroko",
+            "volumeM3": 4.903,
+            "diameterCm": 85.7,
+            "lengthM": 8.5,
+            "harvestDate": "31-08-2026",
+            "origin": "Sangha-Mbaéré",
+            "gps": "3.603186, 16.058275",
+            "registeredAt": "2026-10-31T14:21:01.782Z"
+          }
+        }
+      ],
+      "previousHash": "1bd0cbe075860079c693b15f73db34ce4a2159cc4cf9e4752e8f2933c3db2046",
+      "nonce": 0,
+      "hash": "7a43442ff22b520c5a634829de0d6a5b5238943d2124f76ecac0a6f787e4767a"
+    },
+    {
+      "index": 4712,
+      "timestamp": "2026-10-31T14:21:01.941Z",
+      "transactions": [
+        {
+          "id": "3695f284-826f-4c51-95bc-430d7c8e90d4",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00716",
+          "timestamp": "2026-10-31T14:21:01.941Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00716",
+            "species": "Akon",
+            "volumeM3": 2.254,
+            "diameterCm": 59.9,
+            "lengthM": 8,
+            "harvestDate": "03-01-2026",
+            "origin": "Berberati",
+            "gps": "4.297804, 15.773987",
+            "registeredAt": "2026-10-31T14:21:01.941Z"
+          }
+        }
+      ],
+      "previousHash": "7a43442ff22b520c5a634829de0d6a5b5238943d2124f76ecac0a6f787e4767a",
+      "nonce": 0,
+      "hash": "6b6eb67d22666c35b8740b401f3c0633cd72f147d77f98899bf2edb898a0acad"
+    },
+    {
+      "index": 4713,
+      "timestamp": "2026-10-31T14:21:02.094Z",
+      "transactions": [
+        {
+          "id": "8d70e6a5-3633-4920-96d5-f3f89217b1c0",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00717",
+          "timestamp": "2026-10-31T14:21:02.094Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00717",
+            "species": "Akon",
+            "volumeM3": 4.051,
+            "diameterCm": 102.6,
+            "lengthM": 4.9,
+            "harvestDate": "07-07-2025",
+            "origin": "Ombella-M'Poko",
+            "gps": "4.521024, 18.090849",
+            "registeredAt": "2026-10-31T14:21:02.094Z"
+          }
+        }
+      ],
+      "previousHash": "6b6eb67d22666c35b8740b401f3c0633cd72f147d77f98899bf2edb898a0acad",
+      "nonce": 0,
+      "hash": "aa8fb42e637893d787f482d82fc730e58f5780991da0cceb73764948468404b5"
+    },
+    {
+      "index": 4714,
+      "timestamp": "2026-10-31T14:21:02.254Z",
+      "transactions": [
+        {
+          "id": "13207a5b-6bc6-4395-8015-e6b1b27fc08b",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00718",
+          "timestamp": "2026-10-31T14:21:02.254Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00718",
+            "species": "Fraké",
+            "volumeM3": 5.627,
+            "diameterCm": 87.3,
+            "lengthM": 9.4,
+            "harvestDate": "09-07-2026",
+            "origin": "Lobaye",
+            "gps": "3.871785, 17.976594",
+            "registeredAt": "2026-10-31T14:21:02.254Z"
+          }
+        }
+      ],
+      "previousHash": "aa8fb42e637893d787f482d82fc730e58f5780991da0cceb73764948468404b5",
+      "nonce": 0,
+      "hash": "fbc3b51ec28ca68ee53009923c3c3bb8bf40ad0017b43e2e259967745320786c"
+    },
+    {
+      "index": 4715,
+      "timestamp": "2026-10-31T14:21:02.388Z",
+      "transactions": [
+        {
+          "id": "851bed9e-e3a1-4ae0-8f0c-aff486fc7ab8",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00719",
+          "timestamp": "2026-10-31T14:21:02.388Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00719",
+            "species": "Akon",
+            "volumeM3": 8.446,
+            "diameterCm": 103.7,
+            "lengthM": 10,
+            "harvestDate": "07-11-2025",
+            "origin": "Nana-Mambéré",
+            "gps": "5.728096, 15.507895",
+            "registeredAt": "2026-10-31T14:21:02.387Z"
+          }
+        }
+      ],
+      "previousHash": "fbc3b51ec28ca68ee53009923c3c3bb8bf40ad0017b43e2e259967745320786c",
+      "nonce": 0,
+      "hash": "045c0c3c32f06ba6b7638af65e6b1865e7aad71d284dce147b8431fc40a53fd5"
+    },
+    {
+      "index": 4716,
+      "timestamp": "2026-10-31T14:21:02.511Z",
+      "transactions": [
+        {
+          "id": "463f1ec1-9659-428a-9249-e9230b2f41d1",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00720",
+          "timestamp": "2026-10-31T14:21:02.511Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00720",
+            "species": "Ayous",
+            "volumeM3": 0.843,
+            "diameterCm": 47.8,
+            "lengthM": 4.7,
+            "harvestDate": "24-11-2025",
+            "origin": "Nana-Mambéré",
+            "gps": "5.773797, 15.592999",
+            "registeredAt": "2026-10-31T14:21:02.511Z"
+          }
+        }
+      ],
+      "previousHash": "045c0c3c32f06ba6b7638af65e6b1865e7aad71d284dce147b8431fc40a53fd5",
+      "nonce": 0,
+      "hash": "bfb849990c000f9bfd490db8482806fe5a19eeb81b42f65708ab8813d4ce91c5"
+    },
+    {
+      "index": 4717,
+      "timestamp": "2026-10-31T14:21:02.644Z",
+      "transactions": [
+        {
+          "id": "85704839-4599-4db5-9583-93a932fd38ac",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00721",
+          "timestamp": "2026-10-31T14:21:02.644Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00721",
+            "species": "Sipo",
+            "volumeM3": 4.119,
+            "diameterCm": 75.5,
+            "lengthM": 9.2,
+            "harvestDate": "21-04-2026",
+            "origin": "Sangha-Mbaéré",
+            "gps": "3.634853, 16.062634",
+            "registeredAt": "2026-10-31T14:21:02.644Z"
+          }
+        }
+      ],
+      "previousHash": "bfb849990c000f9bfd490db8482806fe5a19eeb81b42f65708ab8813d4ce91c5",
+      "nonce": 0,
+      "hash": "9bda5f87466aa1fe7eb202f6fb4d50169fd648ce3172e54a13ba5b25de4b120a"
+    },
+    {
+      "index": 4718,
+      "timestamp": "2026-10-31T14:21:02.793Z",
+      "transactions": [
+        {
+          "id": "2fab96ae-e9e3-4fcc-9413-60f2ce9037a9",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00722",
+          "timestamp": "2026-10-31T14:21:02.793Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00722",
+            "species": "Sapelli",
+            "volumeM3": 3.172,
+            "diameterCm": 74.9,
+            "lengthM": 7.2,
+            "harvestDate": "24-06-2026",
+            "origin": "Sangha-Mbaéré",
+            "gps": "3.610926, 16.115155",
+            "registeredAt": "2026-10-31T14:21:02.793Z"
+          }
+        }
+      ],
+      "previousHash": "9bda5f87466aa1fe7eb202f6fb4d50169fd648ce3172e54a13ba5b25de4b120a",
+      "nonce": 0,
+      "hash": "71a6f581c6e70095998fd9cf7ab3bc08f5c550360f5c50f1571480ee86d33f87"
+    },
+    {
+      "index": 4719,
+      "timestamp": "2026-10-31T14:21:02.919Z",
+      "transactions": [
+        {
+          "id": "cf7f4fa4-c3e4-4926-8f8c-b2524ae4c7aa",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00723",
+          "timestamp": "2026-10-31T14:21:02.919Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00723",
+            "species": "Ayous",
+            "volumeM3": 10.541,
+            "diameterCm": 106.2,
+            "lengthM": 11.9,
+            "harvestDate": "30-08-2025",
+            "origin": "Nana-Mambéré",
+            "gps": "5.790527, 15.512521",
+            "registeredAt": "2026-10-31T14:21:02.919Z"
+          }
+        }
+      ],
+      "previousHash": "71a6f581c6e70095998fd9cf7ab3bc08f5c550360f5c50f1571480ee86d33f87",
+      "nonce": 0,
+      "hash": "00c2aca9b1c08010176be3c4aa126feac9fe3480ffc627cae44d676c9033dc7e"
+    },
+    {
+      "index": 4720,
+      "timestamp": "2026-10-31T14:21:03.068Z",
+      "transactions": [
+        {
+          "id": "63ef6c28-4b9a-4069-b014-d9e6def7452e",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00724",
+          "timestamp": "2026-10-31T14:21:03.068Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00724",
+            "species": "Sapelli",
+            "volumeM3": 1.372,
+            "diameterCm": 63,
+            "lengthM": 4.4,
+            "harvestDate": "10-01-2026",
+            "origin": "Berberati",
+            "gps": "4.271869, 15.785190",
+            "registeredAt": "2026-10-31T14:21:03.068Z"
+          }
+        }
+      ],
+      "previousHash": "00c2aca9b1c08010176be3c4aa126feac9fe3480ffc627cae44d676c9033dc7e",
+      "nonce": 0,
+      "hash": "9c370a063b7c37c32e2c1c9be886603c9d8d6e6f04d6b9302f8e7dbf99ab299e"
+    },
+    {
+      "index": 4721,
+      "timestamp": "2026-10-31T14:21:03.256Z",
+      "transactions": [
+        {
+          "id": "652a164f-d4b8-4907-9268-2937ffd3aea3",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00725",
+          "timestamp": "2026-10-31T14:21:03.256Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00725",
+            "species": "Iroko",
+            "volumeM3": 1.566,
+            "diameterCm": 51.9,
+            "lengthM": 7.4,
+            "harvestDate": "15-10-2026",
+            "origin": "Berberati",
+            "gps": "4.290524, 15.739170",
+            "registeredAt": "2026-10-31T14:21:03.256Z"
+          }
+        }
+      ],
+      "previousHash": "9c370a063b7c37c32e2c1c9be886603c9d8d6e6f04d6b9302f8e7dbf99ab299e",
+      "nonce": 0,
+      "hash": "4c3ab030b1a595e07b95a25c8cb2a3fdf51fe5f643daa62a31483243ab7c0856"
+    },
+    {
+      "index": 4722,
+      "timestamp": "2026-10-31T14:21:03.393Z",
+      "transactions": [
+        {
+          "id": "679f4ef9-b429-46e9-aaae-a20dafa0037e",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00726",
+          "timestamp": "2026-10-31T14:21:03.393Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00726",
+            "species": "Sapelli",
+            "volumeM3": 3.584,
+            "diameterCm": 78,
+            "lengthM": 7.5,
+            "harvestDate": "21-05-2026",
+            "origin": "Ombella-M'Poko",
+            "gps": "4.605119, 18.160358",
+            "registeredAt": "2026-10-31T14:21:03.393Z"
+          }
+        }
+      ],
+      "previousHash": "4c3ab030b1a595e07b95a25c8cb2a3fdf51fe5f643daa62a31483243ab7c0856",
+      "nonce": 0,
+      "hash": "4f9deb49b74a44119cc128a7cf6ccfe82b987f6ea71bd30b374413e4ed6e3119"
+    },
+    {
+      "index": 4723,
+      "timestamp": "2026-10-31T14:21:03.553Z",
+      "transactions": [
+        {
+          "id": "e0db7b52-a499-4c18-b206-9af64712cd8c",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00727",
+          "timestamp": "2026-10-31T14:21:03.553Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00727",
+            "species": "Iroko",
+            "volumeM3": 0.917,
+            "diameterCm": 39.2,
+            "lengthM": 7.6,
+            "harvestDate": "18-02-2026",
+            "origin": "Nana-Mambéré",
+            "gps": "5.788091, 15.509048",
+            "registeredAt": "2026-10-31T14:21:03.553Z"
+          }
+        }
+      ],
+      "previousHash": "4f9deb49b74a44119cc128a7cf6ccfe82b987f6ea71bd30b374413e4ed6e3119",
+      "nonce": 0,
+      "hash": "3ca315cac65c8ba70263f8a2f8b6006ba00acf2715f04e907fbf93ec5a3167be"
+    },
+    {
+      "index": 4724,
+      "timestamp": "2026-10-31T14:21:03.691Z",
+      "transactions": [
+        {
+          "id": "009e581e-db1e-4d28-a1b3-59a4b1ef9bb2",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00728",
+          "timestamp": "2026-10-31T14:21:03.691Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00728",
+            "species": "Fraké",
+            "volumeM3": 2.773,
+            "diameterCm": 83.2,
+            "lengthM": 5.1,
+            "harvestDate": "18-03-2025",
+            "origin": "Sangha-Mbaéré",
+            "gps": "3.591185, 16.076855",
+            "registeredAt": "2026-10-31T14:21:03.691Z"
+          }
+        }
+      ],
+      "previousHash": "3ca315cac65c8ba70263f8a2f8b6006ba00acf2715f04e907fbf93ec5a3167be",
+      "nonce": 0,
+      "hash": "ceb7eb006b6be06f927ce559efd06dcfd5c563860364f9d551d3512fb98b9173"
+    },
+    {
+      "index": 4725,
+      "timestamp": "2026-10-31T14:21:03.829Z",
+      "transactions": [
+        {
+          "id": "eeda9984-30c4-436f-a440-928f7360f2bf",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00729",
+          "timestamp": "2026-10-31T14:21:03.829Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00729",
+            "species": "Sipo",
+            "volumeM3": 3.464,
+            "diameterCm": 57.8,
+            "lengthM": 13.2,
+            "harvestDate": "18-02-2026",
+            "origin": "Nana-Mambéré",
+            "gps": "5.750592, 15.526856",
+            "registeredAt": "2026-10-31T14:21:03.829Z"
+          }
+        }
+      ],
+      "previousHash": "ceb7eb006b6be06f927ce559efd06dcfd5c563860364f9d551d3512fb98b9173",
+      "nonce": 0,
+      "hash": "a095b28a24163c2afe572a32d2ad87c592ea67f3412ee9a6b12abe8ae2ffee1d"
+    },
+    {
+      "index": 4726,
+      "timestamp": "2026-10-31T14:21:03.978Z",
+      "transactions": [
+        {
+          "id": "e3e77c11-0e44-42ba-a3f0-51d839d2c2ab",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00730",
+          "timestamp": "2026-10-31T14:21:03.978Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00730",
+            "species": "Sipo",
+            "volumeM3": 2.334,
+            "diameterCm": 64.7,
+            "lengthM": 7.1,
+            "harvestDate": "23-01-2026",
+            "origin": "Lobaye",
+            "gps": "3.829149, 17.913134",
+            "registeredAt": "2026-10-31T14:21:03.978Z"
+          }
+        }
+      ],
+      "previousHash": "a095b28a24163c2afe572a32d2ad87c592ea67f3412ee9a6b12abe8ae2ffee1d",
+      "nonce": 0,
+      "hash": "122086d40d7fa64b8ddd4e383978a8334cb978443d9b016a3d9bdff630aba536"
+    },
+    {
+      "index": 4727,
+      "timestamp": "2026-10-31T14:21:04.106Z",
+      "transactions": [
+        {
+          "id": "472d1d7f-3331-4cbb-9e32-94fb9dde7d42",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00731",
+          "timestamp": "2026-10-31T14:21:04.106Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00731",
+            "species": "Sipo",
+            "volumeM3": 1.332,
+            "diameterCm": 42.7,
+            "lengthM": 9.3,
+            "harvestDate": "09-01-2026",
+            "origin": "Berberati",
+            "gps": "4.281821, 15.784733",
+            "registeredAt": "2026-10-31T14:21:04.106Z"
+          }
+        }
+      ],
+      "previousHash": "122086d40d7fa64b8ddd4e383978a8334cb978443d9b016a3d9bdff630aba536",
+      "nonce": 0,
+      "hash": "415d941b995aa00242905d78057ca8d14a3acfc0f2723cde381a7c83dc8dad69"
+    },
+    {
+      "index": 4728,
+      "timestamp": "2026-10-31T14:21:04.275Z",
+      "transactions": [
+        {
+          "id": "be878e57-fe60-49da-8543-502da90846e0",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00732",
+          "timestamp": "2026-10-31T14:21:04.275Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00732",
+            "species": "Akon",
+            "volumeM3": 1.591,
+            "diameterCm": 59.1,
+            "lengthM": 5.8,
+            "harvestDate": "04-05-2025",
+            "origin": "Nana-Mambéré",
+            "gps": "5.740435, 15.566183",
+            "registeredAt": "2026-10-31T14:21:04.275Z"
+          }
+        }
+      ],
+      "previousHash": "415d941b995aa00242905d78057ca8d14a3acfc0f2723cde381a7c83dc8dad69",
+      "nonce": 0,
+      "hash": "ccc55e2dd1f16317efc7106702d253809df6c0f2557dff6c107408a14b5dfa4e"
+    },
+    {
+      "index": 4729,
+      "timestamp": "2026-10-31T14:21:04.414Z",
+      "transactions": [
+        {
+          "id": "0c7f63dd-c06d-4c08-a571-c722b3eff7fa",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00733",
+          "timestamp": "2026-10-31T14:21:04.414Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00733",
+            "species": "Sapelli",
+            "volumeM3": 7.071,
+            "diameterCm": 92.6,
+            "lengthM": 10.5,
+            "harvestDate": "27-06-2026",
+            "origin": "Sangha-Mbaéré",
+            "gps": "3.657673, 16.017565",
+            "registeredAt": "2026-10-31T14:21:04.414Z"
+          }
+        }
+      ],
+      "previousHash": "ccc55e2dd1f16317efc7106702d253809df6c0f2557dff6c107408a14b5dfa4e",
+      "nonce": 0,
+      "hash": "7938b91fcd42065743c6a26e3b458b7556b0d95ddb9b0586c34ed0d6a01b3b7a"
+    },
+    {
+      "index": 4730,
+      "timestamp": "2026-10-31T14:21:04.532Z",
+      "transactions": [
+        {
+          "id": "534a17af-1587-4a72-ba8f-419a61deed6c",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-GEN-2026-00734",
+          "timestamp": "2026-10-31T14:21:04.532Z",
+          "data": {
+            "grumeId": "RCA-GEN-2026-00734",
+            "species": "Akon",
+            "volumeM3": 2.049,
+            "diameterCm": 69.5,
+            "lengthM": 5.4,
+            "harvestDate": "09-04-2025",
+            "origin": "Ombella-M'Poko",
+            "gps": "4.522208, 18.108443",
+            "registeredAt": "2026-10-31T14:21:04.532Z"
+          }
+        }
+      ],
+      "previousHash": "7938b91fcd42065743c6a26e3b458b7556b0d95ddb9b0586c34ed0d6a01b3b7a",
+      "nonce": 0,
+      "hash": "26c03763c1c27d7c1f872f3247158d3dc657ab0f5e046cf2f81476ed9f844c80"
     }
   ],
   "pendingTransactions": [],
@@ -172874,6 +174382,644 @@
       "origin": "Ombella-M'Poko",
       "gps": "4.557451, 18.196963",
       "registeredAt": "2026-10-31T14:20:56.693Z"
+    },
+    "RCA-GEN-2026-00676": {
+      "grumeId": "RCA-GEN-2026-00676",
+      "species": "Iroko",
+      "volumeM3": 5.154,
+      "diameterCm": 84,
+      "lengthM": 9.3,
+      "harvestDate": "23-03-2026",
+      "origin": "Lobaye",
+      "gps": "3.798090, 17.956690",
+      "registeredAt": "2026-10-31T14:20:56.828Z"
+    },
+    "RCA-GEN-2026-00677": {
+      "grumeId": "RCA-GEN-2026-00677",
+      "species": "Akon",
+      "volumeM3": 5.969,
+      "diameterCm": 83.5,
+      "lengthM": 10.9,
+      "harvestDate": "24-06-2025",
+      "origin": "Nana-Mambéré",
+      "gps": "5.777324, 15.523096",
+      "registeredAt": "2026-10-31T14:20:56.951Z"
+    },
+    "RCA-GEN-2026-00678": {
+      "grumeId": "RCA-GEN-2026-00678",
+      "species": "Iroko",
+      "volumeM3": 3.992,
+      "diameterCm": 102.9,
+      "lengthM": 4.8,
+      "harvestDate": "25-12-2025",
+      "origin": "Lobaye",
+      "gps": "3.852517, 17.920861",
+      "registeredAt": "2026-10-31T14:20:57.054Z"
+    },
+    "RCA-GEN-2026-00679": {
+      "grumeId": "RCA-GEN-2026-00679",
+      "species": "Sapelli",
+      "volumeM3": 5.536,
+      "diameterCm": 88.5,
+      "lengthM": 9,
+      "harvestDate": "26-05-2025",
+      "origin": "Lobaye",
+      "gps": "3.875841, 17.933055",
+      "registeredAt": "2026-10-31T14:20:57.153Z"
+    },
+    "RCA-GEN-2026-00680": {
+      "grumeId": "RCA-GEN-2026-00680",
+      "species": "Akon",
+      "volumeM3": 2.444,
+      "diameterCm": 50.5,
+      "lengthM": 12.2,
+      "harvestDate": "27-03-2026",
+      "origin": "Mambéré-Kadéï",
+      "gps": "4.158498, 15.373902",
+      "registeredAt": "2026-10-31T14:20:57.253Z"
+    },
+    "RCA-GEN-2026-00681": {
+      "grumeId": "RCA-GEN-2026-00681",
+      "species": "Sapelli",
+      "volumeM3": 1.489,
+      "diameterCm": 59.8,
+      "lengthM": 5.3,
+      "harvestDate": "05-06-2026",
+      "origin": "Nana-Mambéré",
+      "gps": "5.804974, 15.540520",
+      "registeredAt": "2026-10-31T14:20:57.380Z"
+    },
+    "RCA-GEN-2026-00682": {
+      "grumeId": "RCA-GEN-2026-00682",
+      "species": "Iroko",
+      "volumeM3": 2.1,
+      "diameterCm": 91.4,
+      "lengthM": 3.2,
+      "harvestDate": "26-09-2025",
+      "origin": "Ombella-M'Poko",
+      "gps": "4.507603, 18.182356",
+      "registeredAt": "2026-10-31T14:20:57.484Z"
+    },
+    "RCA-GEN-2026-00683": {
+      "grumeId": "RCA-GEN-2026-00683",
+      "species": "Iroko",
+      "volumeM3": 0.573,
+      "diameterCm": 42.7,
+      "lengthM": 4,
+      "harvestDate": "30-11-2025",
+      "origin": "Sangha-Mbaéré",
+      "gps": "3.637310, 16.115573",
+      "registeredAt": "2026-10-31T14:20:57.605Z"
+    },
+    "RCA-GEN-2026-00684": {
+      "grumeId": "RCA-GEN-2026-00684",
+      "species": "Ayous",
+      "volumeM3": 5.749,
+      "diameterCm": 84.3,
+      "lengthM": 10.3,
+      "harvestDate": "01-08-2025",
+      "origin": "Mambéré-Kadéï",
+      "gps": "4.140625, 15.293611",
+      "registeredAt": "2026-10-31T14:20:57.780Z"
+    },
+    "RCA-GEN-2026-00685": {
+      "grumeId": "RCA-GEN-2026-00685",
+      "species": "Akon",
+      "volumeM3": 1.557,
+      "diameterCm": 47.2,
+      "lengthM": 8.9,
+      "harvestDate": "26-05-2025",
+      "origin": "Sangha-Mbaéré",
+      "gps": "3.694974, 16.078109",
+      "registeredAt": "2026-10-31T14:20:57.932Z"
+    },
+    "RCA-GEN-2026-00686": {
+      "grumeId": "RCA-GEN-2026-00686",
+      "species": "Sipo",
+      "volumeM3": 1.562,
+      "diameterCm": 51.5,
+      "lengthM": 7.5,
+      "harvestDate": "10-09-2026",
+      "origin": "Nana-Mambéré",
+      "gps": "5.783375, 15.555359",
+      "registeredAt": "2026-10-31T14:20:58.061Z"
+    },
+    "RCA-GEN-2026-00687": {
+      "grumeId": "RCA-GEN-2026-00687",
+      "species": "Akon",
+      "volumeM3": 3.344,
+      "diameterCm": 72.5,
+      "lengthM": 8.1,
+      "harvestDate": "24-01-2025",
+      "origin": "Berberati",
+      "gps": "4.301352, 15.832590",
+      "registeredAt": "2026-10-31T14:20:58.184Z"
+    },
+    "RCA-GEN-2026-00688": {
+      "grumeId": "RCA-GEN-2026-00688",
+      "species": "Sapelli",
+      "volumeM3": 2.438,
+      "diameterCm": 88.1,
+      "lengthM": 4,
+      "harvestDate": "29-05-2026",
+      "origin": "Sangha-Mbaéré",
+      "gps": "3.674823, 15.996999",
+      "registeredAt": "2026-10-31T14:20:58.292Z"
+    },
+    "RCA-GEN-2026-00689": {
+      "grumeId": "RCA-GEN-2026-00689",
+      "species": "Sapelli",
+      "volumeM3": 2.182,
+      "diameterCm": 51.2,
+      "lengthM": 10.6,
+      "harvestDate": "17-08-2025",
+      "origin": "Mambéré-Kadéï",
+      "gps": "4.141233, 15.290149",
+      "registeredAt": "2026-10-31T14:20:58.404Z"
+    },
+    "RCA-GEN-2026-00690": {
+      "grumeId": "RCA-GEN-2026-00690",
+      "species": "Sapelli",
+      "volumeM3": 1.633,
+      "diameterCm": 42.9,
+      "lengthM": 11.3,
+      "harvestDate": "07-05-2026",
+      "origin": "Mambéré-Kadéï",
+      "gps": "4.155729, 15.313442",
+      "registeredAt": "2026-10-31T14:20:58.514Z"
+    },
+    "RCA-GEN-2026-00691": {
+      "grumeId": "RCA-GEN-2026-00691",
+      "species": "Sapelli",
+      "volumeM3": 1.609,
+      "diameterCm": 74.4,
+      "lengthM": 3.7,
+      "harvestDate": "07-06-2026",
+      "origin": "Ombella-M'Poko",
+      "gps": "4.609849, 18.170420",
+      "registeredAt": "2026-10-31T14:20:58.635Z"
+    },
+    "RCA-GEN-2026-00692": {
+      "grumeId": "RCA-GEN-2026-00692",
+      "species": "Akon",
+      "volumeM3": 1.598,
+      "diameterCm": 45.8,
+      "lengthM": 9.7,
+      "harvestDate": "03-08-2026",
+      "origin": "Mambéré-Kadéï",
+      "gps": "4.164565, 15.293440",
+      "registeredAt": "2026-10-31T14:20:58.740Z"
+    },
+    "RCA-GEN-2026-00694": {
+      "grumeId": "RCA-GEN-2026-00694",
+      "species": "Akon",
+      "volumeM3": 1.031,
+      "diameterCm": 35.7,
+      "lengthM": 10.3,
+      "harvestDate": "31-03-2025",
+      "origin": "Mambéré-Kadéï",
+      "gps": "4.090133, 15.327119",
+      "registeredAt": "2026-10-31T14:20:59.017Z"
+    },
+    "RCA-GEN-2026-00695": {
+      "grumeId": "RCA-GEN-2026-00695",
+      "species": "Akon",
+      "volumeM3": 2.882,
+      "diameterCm": 72.4,
+      "lengthM": 7,
+      "harvestDate": "11-10-2025",
+      "origin": "Nana-Mambéré",
+      "gps": "5.771934, 15.520808",
+      "registeredAt": "2026-10-31T14:20:59.121Z"
+    },
+    "RCA-GEN-2026-00696": {
+      "grumeId": "RCA-GEN-2026-00696",
+      "species": "Iroko",
+      "volumeM3": 5.148,
+      "diameterCm": 87.3,
+      "lengthM": 8.6,
+      "harvestDate": "20-01-2026",
+      "origin": "Sangha-Mbaéré",
+      "gps": "3.637132, 16.012501",
+      "registeredAt": "2026-10-31T14:20:59.236Z"
+    },
+    "RCA-GEN-2026-00697": {
+      "grumeId": "RCA-GEN-2026-00697",
+      "species": "Fraké",
+      "volumeM3": 1.561,
+      "diameterCm": 47,
+      "lengthM": 9,
+      "harvestDate": "01-04-2025",
+      "origin": "Nana-Mambéré",
+      "gps": "5.691770, 15.564540",
+      "registeredAt": "2026-10-31T14:20:59.347Z"
+    },
+    "RCA-GEN-2026-00698": {
+      "grumeId": "RCA-GEN-2026-00698",
+      "species": "Ayous",
+      "volumeM3": 0.672,
+      "diameterCm": 51.7,
+      "lengthM": 3.2,
+      "harvestDate": "21-01-2026",
+      "origin": "Lobaye",
+      "gps": "3.809179, 17.874080",
+      "registeredAt": "2026-10-31T14:20:59.461Z"
+    },
+    "RCA-GEN-2026-00699": {
+      "grumeId": "RCA-GEN-2026-00699",
+      "species": "Ayous",
+      "volumeM3": 5.064,
+      "diameterCm": 98.1,
+      "lengthM": 6.7,
+      "harvestDate": "15-03-2025",
+      "origin": "Mambéré-Kadéï",
+      "gps": "4.138914, 15.367917",
+      "registeredAt": "2026-10-31T14:20:59.581Z"
+    },
+    "RCA-GEN-2026-00700": {
+      "grumeId": "RCA-GEN-2026-00700",
+      "species": "Akon",
+      "volumeM3": 2.371,
+      "diameterCm": 65.2,
+      "lengthM": 7.1,
+      "harvestDate": "07-06-2025",
+      "origin": "Nana-Mambéré",
+      "gps": "5.726088, 15.541375",
+      "registeredAt": "2026-10-31T14:20:59.728Z"
+    },
+    "RCA-GEN-2026-00701": {
+      "grumeId": "RCA-GEN-2026-00701",
+      "species": "Akon",
+      "volumeM3": 1.853,
+      "diameterCm": 66.1,
+      "lengthM": 5.4,
+      "harvestDate": "24-10-2025",
+      "origin": "Berberati",
+      "gps": "4.277445, 15.729243",
+      "registeredAt": "2026-10-31T14:20:59.827Z"
+    },
+    "RCA-GEN-2026-00702": {
+      "grumeId": "RCA-GEN-2026-00702",
+      "species": "Sapelli",
+      "volumeM3": 2.946,
+      "diameterCm": 69.8,
+      "lengthM": 7.7,
+      "harvestDate": "20-06-2026",
+      "origin": "Ombella-M'Poko",
+      "gps": "4.527314, 18.190561",
+      "registeredAt": "2026-10-31T14:20:59.932Z"
+    },
+    "RCA-GEN-2026-00703": {
+      "grumeId": "RCA-GEN-2026-00703",
+      "species": "Iroko",
+      "volumeM3": 3.658,
+      "diameterCm": 105.3,
+      "lengthM": 4.2,
+      "harvestDate": "28-09-2026",
+      "origin": "Nana-Mambéré",
+      "gps": "5.737326, 15.565483",
+      "registeredAt": "2026-10-31T14:21:00.077Z"
+    },
+    "RCA-GEN-2026-00704": {
+      "grumeId": "RCA-GEN-2026-00704",
+      "species": "Sipo",
+      "volumeM3": 6.474,
+      "diameterCm": 84.3,
+      "lengthM": 11.6,
+      "harvestDate": "11-08-2026",
+      "origin": "Sangha-Mbaéré",
+      "gps": "3.686158, 16.050527",
+      "registeredAt": "2026-10-31T14:21:00.208Z"
+    },
+    "RCA-GEN-2026-00705": {
+      "grumeId": "RCA-GEN-2026-00705",
+      "species": "Sipo",
+      "volumeM3": 0.499,
+      "diameterCm": 42,
+      "lengthM": 3.6,
+      "harvestDate": "02-03-2025",
+      "origin": "Lobaye",
+      "gps": "3.844879, 17.949227",
+      "registeredAt": "2026-10-31T14:21:00.348Z"
+    },
+    "RCA-GEN-2026-00706": {
+      "grumeId": "RCA-GEN-2026-00706",
+      "species": "Sipo",
+      "volumeM3": 1.082,
+      "diameterCm": 50.5,
+      "lengthM": 5.4,
+      "harvestDate": "19-03-2026",
+      "origin": "Nana-Mambéré",
+      "gps": "5.760014, 15.505401",
+      "registeredAt": "2026-10-31T14:21:00.471Z"
+    },
+    "RCA-GEN-2026-00707": {
+      "grumeId": "RCA-GEN-2026-00707",
+      "species": "Sipo",
+      "volumeM3": 4.608,
+      "diameterCm": 72.7,
+      "lengthM": 11.1,
+      "harvestDate": "04-05-2026",
+      "origin": "Mambéré-Kadéï",
+      "gps": "4.176795, 15.232541",
+      "registeredAt": "2026-10-31T14:21:00.584Z"
+    },
+    "RCA-GEN-2026-00708": {
+      "grumeId": "RCA-GEN-2026-00708",
+      "species": "Ayous",
+      "volumeM3": 3.705,
+      "diameterCm": 72.4,
+      "lengthM": 9,
+      "harvestDate": "25-10-2025",
+      "origin": "Ombella-M'Poko",
+      "gps": "4.601815, 18.151549",
+      "registeredAt": "2026-10-31T14:21:00.715Z"
+    },
+    "RCA-GEN-2026-00709": {
+      "grumeId": "RCA-GEN-2026-00709",
+      "species": "Akon",
+      "volumeM3": 6.632,
+      "diameterCm": 102.1,
+      "lengthM": 8.1,
+      "harvestDate": "04-07-2025",
+      "origin": "Berberati",
+      "gps": "4.253926, 15.799291",
+      "registeredAt": "2026-10-31T14:21:00.940Z"
+    },
+    "RCA-GEN-2026-00710": {
+      "grumeId": "RCA-GEN-2026-00710",
+      "species": "Akon",
+      "volumeM3": 6.358,
+      "diameterCm": 83.9,
+      "lengthM": 11.5,
+      "harvestDate": "11-11-2025",
+      "origin": "Mambéré-Kadéï",
+      "gps": "4.176711, 15.314495",
+      "registeredAt": "2026-10-31T14:21:01.097Z"
+    },
+    "RCA-GEN-2026-00711": {
+      "grumeId": "RCA-GEN-2026-00711",
+      "species": "Sapelli",
+      "volumeM3": 4.019,
+      "diameterCm": 82.6,
+      "lengthM": 7.5,
+      "harvestDate": "11-02-2025",
+      "origin": "Nana-Mambéré",
+      "gps": "5.747937, 15.536915",
+      "registeredAt": "2026-10-31T14:21:01.256Z"
+    },
+    "RCA-GEN-2026-00712": {
+      "grumeId": "RCA-GEN-2026-00712",
+      "species": "Sapelli",
+      "volumeM3": 3.36,
+      "diameterCm": 92.5,
+      "lengthM": 5,
+      "harvestDate": "23-02-2026",
+      "origin": "Lobaye",
+      "gps": "3.855410, 17.984351",
+      "registeredAt": "2026-10-31T14:21:01.394Z"
+    },
+    "RCA-GEN-2026-00713": {
+      "grumeId": "RCA-GEN-2026-00713",
+      "species": "Akon",
+      "volumeM3": 2.267,
+      "diameterCm": 74.5,
+      "lengthM": 5.2,
+      "harvestDate": "03-01-2026",
+      "origin": "Berberati",
+      "gps": "4.301406, 15.751586",
+      "registeredAt": "2026-10-31T14:21:01.528Z"
+    },
+    "RCA-GEN-2026-00714": {
+      "grumeId": "RCA-GEN-2026-00714",
+      "species": "Akon",
+      "volumeM3": 0.562,
+      "diameterCm": 44.6,
+      "lengthM": 3.6,
+      "harvestDate": "15-08-2026",
+      "origin": "Ombella-M'Poko",
+      "gps": "4.521619, 18.174171",
+      "registeredAt": "2026-10-31T14:21:01.657Z"
+    },
+    "RCA-GEN-2026-00715": {
+      "grumeId": "RCA-GEN-2026-00715",
+      "species": "Iroko",
+      "volumeM3": 4.903,
+      "diameterCm": 85.7,
+      "lengthM": 8.5,
+      "harvestDate": "31-08-2026",
+      "origin": "Sangha-Mbaéré",
+      "gps": "3.603186, 16.058275",
+      "registeredAt": "2026-10-31T14:21:01.782Z"
+    },
+    "RCA-GEN-2026-00716": {
+      "grumeId": "RCA-GEN-2026-00716",
+      "species": "Akon",
+      "volumeM3": 2.254,
+      "diameterCm": 59.9,
+      "lengthM": 8,
+      "harvestDate": "03-01-2026",
+      "origin": "Berberati",
+      "gps": "4.297804, 15.773987",
+      "registeredAt": "2026-10-31T14:21:01.941Z"
+    },
+    "RCA-GEN-2026-00717": {
+      "grumeId": "RCA-GEN-2026-00717",
+      "species": "Akon",
+      "volumeM3": 4.051,
+      "diameterCm": 102.6,
+      "lengthM": 4.9,
+      "harvestDate": "07-07-2025",
+      "origin": "Ombella-M'Poko",
+      "gps": "4.521024, 18.090849",
+      "registeredAt": "2026-10-31T14:21:02.094Z"
+    },
+    "RCA-GEN-2026-00718": {
+      "grumeId": "RCA-GEN-2026-00718",
+      "species": "Fraké",
+      "volumeM3": 5.627,
+      "diameterCm": 87.3,
+      "lengthM": 9.4,
+      "harvestDate": "09-07-2026",
+      "origin": "Lobaye",
+      "gps": "3.871785, 17.976594",
+      "registeredAt": "2026-10-31T14:21:02.254Z"
+    },
+    "RCA-GEN-2026-00719": {
+      "grumeId": "RCA-GEN-2026-00719",
+      "species": "Akon",
+      "volumeM3": 8.446,
+      "diameterCm": 103.7,
+      "lengthM": 10,
+      "harvestDate": "07-11-2025",
+      "origin": "Nana-Mambéré",
+      "gps": "5.728096, 15.507895",
+      "registeredAt": "2026-10-31T14:21:02.387Z"
+    },
+    "RCA-GEN-2026-00720": {
+      "grumeId": "RCA-GEN-2026-00720",
+      "species": "Ayous",
+      "volumeM3": 0.843,
+      "diameterCm": 47.8,
+      "lengthM": 4.7,
+      "harvestDate": "24-11-2025",
+      "origin": "Nana-Mambéré",
+      "gps": "5.773797, 15.592999",
+      "registeredAt": "2026-10-31T14:21:02.511Z"
+    },
+    "RCA-GEN-2026-00721": {
+      "grumeId": "RCA-GEN-2026-00721",
+      "species": "Sipo",
+      "volumeM3": 4.119,
+      "diameterCm": 75.5,
+      "lengthM": 9.2,
+      "harvestDate": "21-04-2026",
+      "origin": "Sangha-Mbaéré",
+      "gps": "3.634853, 16.062634",
+      "registeredAt": "2026-10-31T14:21:02.644Z"
+    },
+    "RCA-GEN-2026-00722": {
+      "grumeId": "RCA-GEN-2026-00722",
+      "species": "Sapelli",
+      "volumeM3": 3.172,
+      "diameterCm": 74.9,
+      "lengthM": 7.2,
+      "harvestDate": "24-06-2026",
+      "origin": "Sangha-Mbaéré",
+      "gps": "3.610926, 16.115155",
+      "registeredAt": "2026-10-31T14:21:02.793Z"
+    },
+    "RCA-GEN-2026-00723": {
+      "grumeId": "RCA-GEN-2026-00723",
+      "species": "Ayous",
+      "volumeM3": 10.541,
+      "diameterCm": 106.2,
+      "lengthM": 11.9,
+      "harvestDate": "30-08-2025",
+      "origin": "Nana-Mambéré",
+      "gps": "5.790527, 15.512521",
+      "registeredAt": "2026-10-31T14:21:02.919Z"
+    },
+    "RCA-GEN-2026-00724": {
+      "grumeId": "RCA-GEN-2026-00724",
+      "species": "Sapelli",
+      "volumeM3": 1.372,
+      "diameterCm": 63,
+      "lengthM": 4.4,
+      "harvestDate": "10-01-2026",
+      "origin": "Berberati",
+      "gps": "4.271869, 15.785190",
+      "registeredAt": "2026-10-31T14:21:03.068Z"
+    },
+    "RCA-GEN-2026-00725": {
+      "grumeId": "RCA-GEN-2026-00725",
+      "species": "Iroko",
+      "volumeM3": 1.566,
+      "diameterCm": 51.9,
+      "lengthM": 7.4,
+      "harvestDate": "15-10-2026",
+      "origin": "Berberati",
+      "gps": "4.290524, 15.739170",
+      "registeredAt": "2026-10-31T14:21:03.256Z"
+    },
+    "RCA-GEN-2026-00726": {
+      "grumeId": "RCA-GEN-2026-00726",
+      "species": "Sapelli",
+      "volumeM3": 3.584,
+      "diameterCm": 78,
+      "lengthM": 7.5,
+      "harvestDate": "21-05-2026",
+      "origin": "Ombella-M'Poko",
+      "gps": "4.605119, 18.160358",
+      "registeredAt": "2026-10-31T14:21:03.393Z"
+    },
+    "RCA-GEN-2026-00727": {
+      "grumeId": "RCA-GEN-2026-00727",
+      "species": "Iroko",
+      "volumeM3": 0.917,
+      "diameterCm": 39.2,
+      "lengthM": 7.6,
+      "harvestDate": "18-02-2026",
+      "origin": "Nana-Mambéré",
+      "gps": "5.788091, 15.509048",
+      "registeredAt": "2026-10-31T14:21:03.553Z"
+    },
+    "RCA-GEN-2026-00728": {
+      "grumeId": "RCA-GEN-2026-00728",
+      "species": "Fraké",
+      "volumeM3": 2.773,
+      "diameterCm": 83.2,
+      "lengthM": 5.1,
+      "harvestDate": "18-03-2025",
+      "origin": "Sangha-Mbaéré",
+      "gps": "3.591185, 16.076855",
+      "registeredAt": "2026-10-31T14:21:03.691Z"
+    },
+    "RCA-GEN-2026-00729": {
+      "grumeId": "RCA-GEN-2026-00729",
+      "species": "Sipo",
+      "volumeM3": 3.464,
+      "diameterCm": 57.8,
+      "lengthM": 13.2,
+      "harvestDate": "18-02-2026",
+      "origin": "Nana-Mambéré",
+      "gps": "5.750592, 15.526856",
+      "registeredAt": "2026-10-31T14:21:03.829Z"
+    },
+    "RCA-GEN-2026-00730": {
+      "grumeId": "RCA-GEN-2026-00730",
+      "species": "Sipo",
+      "volumeM3": 2.334,
+      "diameterCm": 64.7,
+      "lengthM": 7.1,
+      "harvestDate": "23-01-2026",
+      "origin": "Lobaye",
+      "gps": "3.829149, 17.913134",
+      "registeredAt": "2026-10-31T14:21:03.978Z"
+    },
+    "RCA-GEN-2026-00731": {
+      "grumeId": "RCA-GEN-2026-00731",
+      "species": "Sipo",
+      "volumeM3": 1.332,
+      "diameterCm": 42.7,
+      "lengthM": 9.3,
+      "harvestDate": "09-01-2026",
+      "origin": "Berberati",
+      "gps": "4.281821, 15.784733",
+      "registeredAt": "2026-10-31T14:21:04.106Z"
+    },
+    "RCA-GEN-2026-00732": {
+      "grumeId": "RCA-GEN-2026-00732",
+      "species": "Akon",
+      "volumeM3": 1.591,
+      "diameterCm": 59.1,
+      "lengthM": 5.8,
+      "harvestDate": "04-05-2025",
+      "origin": "Nana-Mambéré",
+      "gps": "5.740435, 15.566183",
+      "registeredAt": "2026-10-31T14:21:04.275Z"
+    },
+    "RCA-GEN-2026-00733": {
+      "grumeId": "RCA-GEN-2026-00733",
+      "species": "Sapelli",
+      "volumeM3": 7.071,
+      "diameterCm": 92.6,
+      "lengthM": 10.5,
+      "harvestDate": "27-06-2026",
+      "origin": "Sangha-Mbaéré",
+      "gps": "3.657673, 16.017565",
+      "registeredAt": "2026-10-31T14:21:04.414Z"
+    },
+    "RCA-GEN-2026-00734": {
+      "grumeId": "RCA-GEN-2026-00734",
+      "species": "Akon",
+      "volumeM3": 2.049,
+      "diameterCm": 69.5,
+      "lengthM": 5.4,
+      "harvestDate": "09-04-2025",
+      "origin": "Ombella-M'Poko",
+      "gps": "4.522208, 18.108443",
+      "registeredAt": "2026-10-31T14:21:04.532Z"
     }
   }
 }
