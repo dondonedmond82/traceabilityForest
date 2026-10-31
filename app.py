@@ -766,7 +766,7 @@ stats_message = pn.pane.Alert(
     alert_type="warning" if stats_load_error else "success"
 )
 stats_kpis = pn.Row(sizing_mode="stretch_width")
-stats_charts = pn.GridBox(ncols=2, sizing_mode="stretch_width", margin=10, min_height=500)
+stats_charts = pn.Column(sizing_mode="stretch_width", margin=10, min_height=500)
 
 def _filtered_statistics_data():
     if stats_data.empty:
@@ -837,7 +837,7 @@ def render_statistics_dashboard(event=None):
 
     stats_message.object = (
         f"Showing **{len(frame):,}** of **{len(stats_data):,}** registered timber records. "
-        "Use the Essence and Origine filters to update both charts."
+        "Use the Essence and Origine filters to update the charts, table and heatmap."
     )
     stats_message.alert_type = "success"
 
@@ -886,22 +886,101 @@ def render_statistics_dashboard(event=None):
     else:
         line_plot = pn.pane.Markdown("No valid harvest dates are available for this selection.")
 
-    # Only the two requested charts are displayed.
+    # Summary table: registration and volume indicators by timber species.
+    summary_table = (
+        frame.groupby("Essence", dropna=False)
+        .agg(
+            **{
+                "Nombre de grumes": ("Grume ID", "count"),
+                "Volume total (m³)": ("Volume (m³)", "sum"),
+                "Volume moyen (m³)": ("Volume (m³)", "mean"),
+                "Diamètre moyen (cm)": ("Diamètre (cm)", "mean"),
+                "Longueur moyenne (m)": ("Longueur (m)", "mean"),
+            }
+        )
+        .reset_index()
+        .rename(columns={"Essence": "Essence"})
+        .sort_values("Nombre de grumes", ascending=False)
+    )
+    numeric_cols = [c for c in summary_table.columns if c != "Essence"]
+    summary_table[numeric_cols] = summary_table[numeric_cols].round(2)
+    table_widget = pn.widgets.Tabulator(
+        summary_table,
+        show_index=False,
+        pagination="local",
+        page_size=10,
+        height=300,
+        sizing_mode="stretch_width",
+        header_filters=True,
+    )
+
+    # Heatmap: number of registered Grumes by origin and timber species.
+    heatmap_data = (
+        frame.dropna(subset=["Origine", "Essence"])
+        .groupby(["Origine", "Essence"])
+        .size()
+        .reset_index(name="Nombre de grumes")
+    )
+    if not heatmap_data.empty:
+        # Keep the visualization readable when the dataset contains many categories.
+        top_species = (
+            heatmap_data.groupby("Essence")["Nombre de grumes"]
+            .sum().nlargest(15).index
+        )
+        top_origins = (
+            heatmap_data.groupby("Origine")["Nombre de grumes"]
+            .sum().nlargest(15).index
+        )
+        heatmap_data = heatmap_data[
+            heatmap_data["Essence"].isin(top_species)
+            & heatmap_data["Origine"].isin(top_origins)
+        ]
+        heatmap_plot = heatmap_data.hvplot.heatmap(
+            x="Origine", y="Essence", C="Nombre de grumes",
+            title="Heatmap – Grumes by Origin and Species",
+            height=360, cmap="YlGnBu", colorbar=True,
+            tools=["hover", "pan", "wheel_zoom", "box_zoom", "reset", "save"],
+            responsive=True,
+        ).opts(xrotation=35)
+    else:
+        heatmap_plot = pn.pane.Markdown("No origin/species combinations are available for this selection.")
+
+    # Layout requested:
+    # Row 1: Heatmap and Histogram side by side.
+    # Row 2: Line chart across the available width.
+    # Row 3: Summary table across the available width.
+    heatmap_card = _statistics_card(
+        "1. Heatmap – Origin and Species",
+        heatmap_plot,
+        "Compares the number of registered Grumes across forest origins and timber species. "
+        "Darker or more intense cells represent combinations with more registrations. "
+        "For readability, the chart displays up to the 15 most represented origins and species."
+    )
+    histogram_card = _statistics_card(
+        "2. Histogram – Timber Volume Distribution",
+        hist_plot,
+        "Shows how registered timber volumes are distributed across value intervals (bins). "
+        "Taller bars indicate volume ranges containing more Grumes. "
+        "Use it to understand typical volumes, spread and possible unusually small or large values."
+    )
+    line_card = _statistics_card(
+        "3. Line chart – Timber Harvests Over Time",
+        line_plot,
+        "Shows the number of harvested Grumes recorded for each harvest date. "
+        "Peaks indicate dates with more recorded harvests, while lower points indicate fewer. "
+        "Use this timeline to explore changes in harvesting activity over time."
+    )
+    table_card = _statistics_card(
+        "4. Registration Summary Table",
+        table_widget,
+        "Summarizes registrations by timber species, including the number of Grumes, total and average "
+        "volume, average diameter and average length. Use the column filters to inspect particular species."
+    )
+
     stats_charts.objects = [
-        _statistics_card(
-            "1. Histogram – Timber Volume Distribution",
-            hist_plot,
-            "Shows how registered timber volumes are distributed across value intervals (bins). "
-            "Taller bars indicate volume ranges containing more Grumes. "
-            "Use it to understand typical volumes, spread and possible unusually small or large values."
-        ),
-        _statistics_card(
-            "2. Line chart – Timber Harvests Over Time",
-            line_plot,
-            "Shows the number of harvested Grumes recorded for each harvest date. "
-            "Peaks indicate dates with more recorded harvests, while lower points indicate fewer. "
-            "Use this timeline to explore changes in harvesting activity over time."
-        ),
+        pn.Row(heatmap_card, histogram_card, sizing_mode="stretch_width"),
+        pn.Row(line_card, sizing_mode="stretch_width"),
+        pn.Row(table_card, sizing_mode="stretch_width"),
     ]
 
 stats_essence_filter.param.watch(render_statistics_dashboard, "value")
