@@ -1,0 +1,14 @@
+{
+  "name": "forest-traceability-blockchain",
+  "version": "1.0.0",
+  "description": "Timber chain-of-custody blockchain prototype with Panel UI",
+  "main": "blockchain.js",
+  "scripts": {
+    "start": "node blockchain.js",
+    "dev": "node --watch blockchain.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2"
+  }
+}

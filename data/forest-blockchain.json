@@ -1,0 +1,14 @@
+{
+  "chain": [
+    {
+      "index": 0,
+      "timestamp": "2026-10-31T07:41:34.671235+00:00",
+      "transactions": [],
+      "previousHash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "nonce": 0,
+      "hash": "f72a0df2b376cdb50a993730c98afc4e9100aee9e2127f855d668d7ab115652a"
+    }
+  ],
+  "pendingTransactions": [],
+  "timber": {}
+}
