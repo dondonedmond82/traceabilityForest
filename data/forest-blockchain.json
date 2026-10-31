@@ -52045,6 +52045,32 @@
       "previousHash": "db21d2ba53ace01e9b66c0c90e7a543a003e0bbdc4c000f83f1736cea4004b6d",
       "nonce": 0,
       "hash": "7af52692bef99c3f832cea227648938360a8b691543eccb8ba6d635bdf855dc5"
+    },
+    {
+      "index": 2003,
+      "timestamp": "2026-10-31T10:17:48.598Z",
+      "transactions": [
+        {
+          "id": "9d359676-d631-4deb-adbf-23b29c919e93",
+          "type": "TIMBER_REGISTERED",
+          "grumeId": "RCA-LOB-2026-0001",
+          "timestamp": "2026-10-31T10:17:48.597Z",
+          "data": {
+            "grumeId": "RCA-LOB-2026-0001",
+            "species": "Sapelli",
+            "volumeM3": 1.414,
+            "diameterCm": 60,
+            "lengthM": 5,
+            "harvestDate": "31-10-2026",
+            "origin": "Lobaye",
+            "gps": "4.123456, 18.123456",
+            "registeredAt": "2026-10-31T10:17:48.596Z"
+          }
+        }
+      ],
+      "previousHash": "7af52692bef99c3f832cea227648938360a8b691543eccb8ba6d635bdf855dc5",
+      "nonce": 0,
+      "hash": "f8c245419ead962b0afa9796da95a4f4285818f8b39a4bc31cdd3062b751367e"
     }
   ],
   "pendingTransactions": [],
@@ -74048,6 +74074,17 @@
       "origin": "Berberati",
       "gps": "4.278800, 15.878234",
       "registeredAt": "2026-10-31T09:15:43.842Z"
+    },
+    "RCA-LOB-2026-0001": {
+      "grumeId": "RCA-LOB-2026-0001",
+      "species": "Sapelli",
+      "volumeM3": 1.414,
+      "diameterCm": 60,
+      "lengthM": 5,
+      "harvestDate": "31-10-2026",
+      "origin": "Lobaye",
+      "gps": "4.123456, 18.123456",
+      "registeredAt": "2026-10-31T10:17:48.596Z"
     }
   }
 }
