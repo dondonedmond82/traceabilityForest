@@ -61,13 +61,14 @@ app.get("/api/v1/timber", (_req, res) => {
   res.json({ timber: Object.values(ledger.timber) });
 });
 app.post("/api/v1/timber", (req, res) => {
-  const { grumeId, species, volumeM3, harvestDate, origin, gps } = req.body || {};
+  const { grumeId, species, volumeM3, diameterCm, lengthM, harvestDate, origin, gps } = req.body || {};
   if (!grumeId || !species || !Number.isFinite(Number(volumeM3)) || Number(volumeM3) <= 0)
     return res.status(400).json({ error: "grumeId, species and positive volumeM3 are required" });
   const ledger = readLedger();
   if (ledger.timber[grumeId]) return res.status(409).json({ error: "This grumeId is already registered" });
-  const record = { grumeId, species, volumeM3: Number(volumeM3), harvestDate: harvestDate || null,
-    origin: origin || "", gps: gps || "", registeredAt: now() };
+  const record = { grumeId, species, volumeM3: Number(volumeM3),
+    diameterCm: Number(diameterCm) || null, lengthM: Number(lengthM) || null,
+    harvestDate: harvestDate || null, origin: origin || "", gps: gps || "", registeredAt: now() };
   ledger.timber[grumeId] = record;
   ledger.pendingTransactions.push({ id: crypto.randomUUID(), type: "TIMBER_REGISTERED",
     grumeId, timestamp: now(), data: record });

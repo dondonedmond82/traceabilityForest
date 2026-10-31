@@ -2,3 +2,5 @@ panel>=1.4.5
 pandas>=2.0
 requests>=2.31
 hvplot>=0.10
+
+openpyxl>=3.1

@@ -69,3 +69,25 @@ The backend exposes an API boundary. A real Arena integration requires the Arena
 - Add signed transactions and key management.
 - Add backups, monitoring, rate limits, schema validation and automated tests.
 - Validate legal and operational requirements with the relevant forestry authority.
+
+
+## Timber registration form updates
+
+The Register timber tab now includes:
+- Species and forest-origin dropdowns (including Akon, Sapelli, Lobaye and Berberati).
+- Automatic volume calculation from measured diameter and length using
+  `V = π × (D / 2)² × L` (diameter is entered in centimetres; length in metres).
+- Harvest date submission in `dd-mm-yyyy` format.
+- Browser geolocation capture using the **Get my location** button.
+
+### GPS permission
+
+Allow location access when the browser asks. Geolocation works on `localhost` or
+when the application is served over HTTPS. If permission is denied, enter the
+coordinates manually in the GPS field.
+
+### Volume calculation example
+
+For a log with a diameter of 60 cm and a length of 5 m, the calculated volume
+is approximately 1.414 m³. The volume field is read-only because it is calculated
+from the dimensions.
