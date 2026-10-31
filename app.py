@@ -1,6 +1,8 @@
 import os, json, requests, pandas as pd
 import panel as pn
 import hvplot.pandas
+from bokeh.plotting import figure
+from bokeh.models import FactorRange, HoverTool
 from datetime import datetime
 from math import pi
 from io import BytesIO
@@ -669,14 +671,14 @@ APP_DIR = os.path.dirname(os.path.abspath(__file__))
 BLOCKCHAIN_JSON_PATH = os.path.join(APP_DIR, "data", "forest-blockchain.json")
 
 def load_statistics_records():
-    """Read timber registrations from the project's data/forest-forest-blockchain.json file."""
+    """Read timber registrations from data/forest-blockchain.json."""
     json_path = BLOCKCHAIN_JSON_PATH
 
     if not os.path.isfile(json_path):
         return pd.DataFrame(), (
             "Blockchain data file was not found. Expected location: "
             f"{json_path}. Create a 'data' folder beside app.py and place "
-            "blockchain.json inside it."
+            "forest-blockchain.json inside it."
         )
 
     try:
@@ -721,7 +723,7 @@ def load_statistics_records():
 
         frame = pd.DataFrame(rows)
         if frame.empty:
-            return frame, "The data/forest-forest-blockchain.json file contains no timber registration records."
+            return frame, "The data/forest-blockchain.json file contains no timber registration records."
 
         for column in ["Volume (m³)", "Diamètre (cm)", "Longueur (m)"]:
             frame[column] = pd.to_numeric(frame[column], errors="coerce")
@@ -766,7 +768,7 @@ stats_message = pn.pane.Alert(
     alert_type="warning" if stats_load_error else "success"
 )
 stats_kpis = pn.Row(sizing_mode="stretch_width")
-stats_charts = pn.GridBox(ncols=2, sizing_mode="stretch_width", margin=10)
+stats_charts = pn.GridBox(ncols=2, sizing_mode="stretch_width", margin=10, min_height=500)
 
 def _filtered_statistics_data():
     if stats_data.empty:
@@ -846,11 +848,36 @@ def render_statistics_dashboard(event=None):
         frame.groupby("Origine")["Volume (m³)"].sum()
         .sort_values(ascending=True).reset_index()
     )
-    barh_plot = origin_volume.hvplot.barh(
-        x="Volume (m³)", y="Origine", title="Barh – Total Volume by Origine",
-        height=330, color="#d97706", tools=["hover", "pan", "wheel_zoom", "reset"],
-        responsive=True
+    # Use native Bokeh for the horizontal bar chart. Older HoloViews versions
+    # can compare numeric axis bounds with categorical labels and raise:
+    # TypeError: '<=' not supported between instances of 'int' and 'str'.
+    origin_volume = origin_volume.sort_values("Volume (m³)", ascending=True)
+    origin_labels = origin_volume["Origine"].astype(str).tolist()
+    origin_values = origin_volume["Volume (m³)"].fillna(0).astype(float).tolist()
+
+    barh_plot = figure(
+        y_range=FactorRange(*origin_labels),
+        height=330,
+        sizing_mode="stretch_width",
+        title="Barh – Total Volume by Origine",
+        x_axis_label="Total volume (m³)",
+        y_axis_label="Origine",
+        tools="pan,wheel_zoom,box_zoom,reset,save",
+        toolbar_location="above"
     )
+    barh_plot.hbar(
+        y=origin_labels,
+        right=origin_values,
+        height=0.65,
+        color="#d97706",
+        line_color="#b45309",
+        legend_label="Volume (m³)"
+    )
+    barh_plot.add_tools(HoverTool(
+        tooltips=[("Origine", "@y"), ("Volume (m³)", "@right{0.00}")]
+    ))
+    barh_plot.legend.visible = False
+    barh_plot.x_range.start = 0
 
     # 3. Scatter: diameter against volume, with Essence as the color group.
     scatter_frame = frame.dropna(subset=["Diamètre (cm)", "Volume (m³)"])
@@ -918,7 +945,8 @@ statistics_view = pn.Column(
     stats_message,
     stats_kpis,
     stats_charts,
-    sizing_mode="stretch_width"
+    sizing_mode="stretch_width",
+    min_height=650
 )
 
 header = pn.Column(
@@ -960,15 +988,18 @@ tabs = pn.Tabs(("Dashboard", dashboard), ("Register timber", register_view), ("G
                ("Record event", event_view), ("Traceability", history_view),
                ("Blockchain explorer", ledger_view), ("Arena integration", arena_view),
                ("Statistics graph", statistics_view),
-               dynamic=True, sizing_mode="stretch_both")
+               dynamic=False, sizing_mode="stretch_both")
 
 statistics_menu_btn = pn.widgets.Button(
     name="Statistics graph", button_type="primary", icon="chart-no-axes-combined",
     sizing_mode="stretch_width"
 )
 def open_statistics_graph(event):
+    # Re-render using the latest JSON-backed data whenever the sidebar menu is clicked.
     render_statistics_dashboard()
     tabs.active = tabs.names.index("Statistics graph")
+    # Trigger a layout update after switching tabs (helps older Panel releases).
+    statistics_view.param.trigger("objects")
 statistics_menu_btn.on_click(open_statistics_graph)
 template = pn.template.FastListTemplate(
     title="Forest Traceability",
@@ -983,4 +1014,5 @@ template = pn.template.FastListTemplate(
 refresh_dashboard()
 refresh_geo_from_system()
 render_statistics_dashboard()
+tabs.active = 0
 template.servable()
