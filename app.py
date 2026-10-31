@@ -7,7 +7,7 @@ from io import BytesIO
 
 pn.extension("tabulator", sizing_mode="stretch_width")
 API_URL = os.getenv("BLOCKCHAIN_API_URL", "http://127.0.0.1:3000/api/v1")
-API_KEY = os.getenv("API_KEY", "dev-change-this-key")
+API_KEY = os.getenv("API_KEY", "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")
 HEADERS = {"x-api-key": API_KEY}
 
 def api_get(path):
