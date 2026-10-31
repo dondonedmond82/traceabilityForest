@@ -1,8 +1,6 @@
 import os, json, requests, pandas as pd
 import panel as pn
 import hvplot.pandas
-from bokeh.plotting import figure
-from bokeh.models import FactorRange, HoverTool
 from datetime import datetime
 from math import pi
 from io import BytesIO
@@ -780,9 +778,25 @@ def _filtered_statistics_data():
         filtered = filtered[filtered["Origine"] == stats_origin_filter.value]
     return filtered
 
-def _statistics_card(title, plot):
+def _statistics_card(title, plot, description):
+    description_pane = pn.pane.Markdown(
+        f"**Visual interpretation**\n\n{description}",
+        sizing_mode="stretch_width",
+        styles={
+            "background": "#f8fafc",
+            "border-left": "3px solid #16866f",
+            "padding": "10px 12px",
+            "font-size": "13px",
+            "color": "#334155"
+        }
+    )
     return pn.Card(
-        plot,
+        pn.Column(
+            plot,
+            pn.Spacer(height=8),
+            description_pane,
+            sizing_mode="stretch_width"
+        ),
         title=title,
         collapsed=False,
         sizing_mode="stretch_width",
@@ -792,13 +806,16 @@ def _statistics_card(title, plot):
 def render_statistics_dashboard(event=None):
     global stats_data, stats_load_error
 
+    # Reload the JSON file only when the reload button is clicked.
     if event is not None and getattr(event, "obj", None) is stats_refresh_btn:
         stats_data, stats_load_error = load_statistics_records()
         stats_essence_filter.options = ["Toutes les essences"] + (
-            sorted(stats_data["Essence"].dropna().unique().tolist()) if not stats_data.empty else []
+            sorted(stats_data["Essence"].dropna().unique().tolist())
+            if not stats_data.empty else []
         )
         stats_origin_filter.options = ["Toutes les origines"] + (
-            sorted(stats_data["Origine"].dropna().unique().tolist()) if not stats_data.empty else []
+            sorted(stats_data["Origine"].dropna().unique().tolist())
+            if not stats_data.empty else []
         )
         stats_essence_filter.value = "Toutes les essences"
         stats_origin_filter.value = "Toutes les origines"
@@ -807,13 +824,20 @@ def render_statistics_dashboard(event=None):
         stats_message.object = stats_load_error
         stats_message.alert_type = "danger"
         stats_kpis.objects = []
-        stats_charts.objects = [pn.pane.Markdown("### Statistics are unavailable until the JSON file can be read.")]
+        stats_charts.objects = [
+            pn.pane.Markdown(
+                "### Statistics are unavailable. Check that "
+                "`data/forest-blockchain.json` exists and contains timber records."
+            )
+        ]
         return
 
+    # Apply the Essence and Origine dropdown selections.
     frame = _filtered_statistics_data()
+
     stats_message.object = (
         f"Showing **{len(frame):,}** of **{len(stats_data):,}** registered timber records. "
-        "Use the Essence and Origine filters to update all charts."
+        "Use the Essence and Origine filters to update both charts."
     )
     stats_message.alert_type = "success"
 
@@ -826,112 +850,58 @@ def render_statistics_dashboard(event=None):
     ]
 
     if frame.empty:
-        stats_charts.objects = [pn.pane.Markdown("### No records match the selected filters.")]
+        stats_charts.objects = [
+            pn.pane.Markdown("### No records match the selected filters.")
+        ]
         return
 
-    # Aggregate registrations by Essence for the bar chart.
-    essence_counts = (
-        frame.groupby("Essence").size()
-        .reset_index(name="Nombre de grumes")
-        .sort_values("Nombre de grumes", ascending=False)
-    )
-
-    # 1. Bar: number of grumes by Essence.
-    bar_plot = essence_counts.hvplot.bar(
-        x="Essence", y="Nombre de grumes", title="Bar – Number of Grumes by Essence",
-        height=330, rot=35, color="#16866f", tools=["hover", "pan", "wheel_zoom", "reset"],
-        responsive=True
-    )
-
-    # 2. Barh: total timber volume by Origine.
-    origin_volume = (
-        frame.groupby("Origine")["Volume (m³)"].sum()
-        .sort_values(ascending=True).reset_index()
-    )
-    # Use native Bokeh for the horizontal bar chart. Older HoloViews versions
-    # can compare numeric axis bounds with categorical labels and raise:
-    # TypeError: '<=' not supported between instances of 'int' and 'str'.
-    origin_volume = origin_volume.sort_values("Volume (m³)", ascending=True)
-    origin_labels = origin_volume["Origine"].astype(str).tolist()
-    origin_values = origin_volume["Volume (m³)"].fillna(0).astype(float).tolist()
-
-    barh_plot = figure(
-        y_range=FactorRange(*origin_labels),
-        height=330,
-        sizing_mode="stretch_width",
-        title="Barh – Total Volume by Origine",
-        x_axis_label="Total volume (m³)",
-        y_axis_label="Origine",
-        tools="pan,wheel_zoom,box_zoom,reset,save",
-        toolbar_location="above"
-    )
-    barh_plot.hbar(
-        y=origin_labels,
-        right=origin_values,
-        height=0.65,
-        color="#d97706",
-        line_color="#b45309",
-        legend_label="Volume (m³)"
-    )
-    barh_plot.add_tools(HoverTool(
-        tooltips=[("Origine", "@y"), ("Volume (m³)", "@right{0.00}")]
-    ))
-    barh_plot.legend.visible = False
-    barh_plot.x_range.start = 0
-
-    # 3. Scatter: diameter against volume, with Essence as the color group.
-    scatter_frame = frame.dropna(subset=["Diamètre (cm)", "Volume (m³)"])
-    scatter_plot = scatter_frame.hvplot.scatter(
-        x="Diamètre (cm)", y="Volume (m³)", by="Essence",
-        title="Scatter – Diameter vs Volume",
-        height=330, size=7, alpha=0.65, legend="right",
-        hover_cols=["Grume ID", "Origine", "Longueur (m)"],
-        tools=["hover", "pan", "wheel_zoom", "box_zoom", "reset", "save"],
-        responsive=True
-    )
-
-    # 4. Heatmap: registration counts by Origine and Essence.
-    heatmap_data = (
-        frame.groupby(["Origine", "Essence"]).size()
-        .reset_index(name="Nombre de grumes")
-    )
-    heatmap_plot = heatmap_data.hvplot.heatmap(
-        x="Essence", y="Origine", C="Nombre de grumes",
-        title="Heatmap – Grumes by Origine and Essence",
-        height=360, cmap="Viridis", colorbar=True,
-        tools=["hover", "pan", "wheel_zoom", "reset"], responsive=True
-    )
-
-    # 5. Histogram: distribution of timber volumes.
+    # Histogram: distribution of timber volumes.
     hist_values = frame.dropna(subset=["Volume (m³)"])
-    hist_plot = hist_values.hvplot.hist(
-        y="Volume (m³)", bins=25, title="Histogram – Timber Volume Distribution",
-        height=330, color="#0f766e", alpha=0.8,
-        tools=["hover", "pan", "wheel_zoom", "reset"], responsive=True
-    )
+    if not hist_values.empty:
+        hist_plot = hist_values.hvplot.hist(
+            y="Volume (m³)", bins=25,
+            title="Histogram – Timber Volume Distribution",
+            height=330, color="#0f766e", alpha=0.8,
+            tools=["hover", "pan", "wheel_zoom", "reset"],
+            responsive=True
+        )
+    else:
+        hist_plot = pn.pane.Markdown("No valid timber volume values are available for this selection.")
 
-    # 6. Line: number of timber harvests over time.
+    # Line: number of timber harvests over time.
     line_data = (
         frame.dropna(subset=["Date de récolte"])
         .groupby("Date de récolte").size()
         .reset_index(name="Nombre de grumes")
         .sort_values("Date de récolte")
     )
-    line_plot = line_data.hvplot.line(
-        x="Date de récolte", y="Nombre de grumes",
-        title="Line – Timber Harvests Over Time",
-        height=330, color="#2563eb", line_width=2, marker="circle",
-        tools=["hover", "pan", "wheel_zoom", "box_zoom", "reset", "save"],
-        responsive=True
-    )
+    if not line_data.empty:
+        line_plot = line_data.hvplot.line(
+            x="Date de récolte", y="Nombre de grumes",
+            title="Line – Timber Harvests Over Time",
+            height=330, color="#2563eb", line_width=2, marker="circle",
+            tools=["hover", "pan", "wheel_zoom", "box_zoom", "reset", "save"],
+            responsive=True
+        )
+    else:
+        line_plot = pn.pane.Markdown("No valid harvest dates are available for this selection.")
 
+    # Only the two requested charts are displayed.
     stats_charts.objects = [
-        _statistics_card("1. Bar chart", bar_plot),
-        _statistics_card("2. Horizontal bar chart", barh_plot),
-        _statistics_card("3. Scatter plot", scatter_plot),
-        _statistics_card("4. Heatmap", heatmap_plot),
-        _statistics_card("5. Histogram", hist_plot),
-        _statistics_card("6. Line chart", line_plot),
+        _statistics_card(
+            "1. Histogram – Timber Volume Distribution",
+            hist_plot,
+            "Shows how registered timber volumes are distributed across value intervals (bins). "
+            "Taller bars indicate volume ranges containing more Grumes. "
+            "Use it to understand typical volumes, spread and possible unusually small or large values."
+        ),
+        _statistics_card(
+            "2. Line chart – Timber Harvests Over Time",
+            line_plot,
+            "Shows the number of harvested Grumes recorded for each harvest date. "
+            "Peaks indicate dates with more recorded harvests, while lower points indicate fewer. "
+            "Use this timeline to explore changes in harvesting activity over time."
+        ),
     ]
 
 stats_essence_filter.param.watch(render_statistics_dashboard, "value")
