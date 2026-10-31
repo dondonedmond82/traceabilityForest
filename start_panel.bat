@@ -94,10 +94,10 @@ if errorlevel 1 (
 )
 
 echo.
-echo Starting Panel dashboard on port 5006...
-echo Dashboard URL: http://localhost:5006/app
+echo Starting Panel dashboard on port 80...
+echo Dashboard URL: http://localhost:80/app
 echo Keep both terminal windows open while using the application.
 echo.
-panel serve app.py --port 5006 --show --autoreload
+panel serve app.py --port 80 --show --autoreload
 
 pause
