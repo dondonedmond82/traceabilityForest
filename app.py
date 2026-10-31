@@ -268,7 +268,7 @@ def _render_geo_map(selected_species="All species", records=None):
 
     origins_count = frame["Origine"].nunique() if not frame.empty else 0
     geo_summary.objects = [
-        metric("GPS points displayed", len(frame), "After Essence filter"),
+        metric("GPS timber records", len(frame), "After Essence filter"),
         metric("Forest origins", origins_count, "Shown in map legend"),
         metric("Missing GPS", missing_count, "Records without valid coordinates")
     ]
@@ -287,11 +287,25 @@ def _render_geo_map(selected_species="All species", records=None):
         geo_status.alert_type = "warning"
         return
 
+    # Aggregate records by forest origin and essence. Each bubble represents
+    # the total number of registered grumes for that Essence in that Origine.
+    # Its position is the average GPS location of those records.
+    bubble_data = (
+        frame.groupby(["Origine", "Species"], dropna=False)
+        .agg(
+            **{
+                "Total grumes": ("Grume ID", "count"),
+                "Latitude": ("Latitude", "mean"),
+                "Longitude": ("Longitude", "mean"),
+                "Total volume (m³)": ("Volume (m³)", lambda values: pd.to_numeric(values, errors="coerce").fillna(0).sum()),
+                "Grume IDs": ("Grume ID", lambda values: ", ".join(values.astype(str).tolist()))
+            }
+        )
+        .reset_index()
+    )
+
     center = [float(frame["Latitude"].mean()), float(frame["Longitude"].mean())]
-    if len(frame) == 1:
-        zoom = 11
-    else:
-        zoom = 7
+    zoom = 7 if len(frame) > 1 else 11
 
     map_view = folium.Map(
         location=center,
@@ -300,12 +314,11 @@ def _render_geo_map(selected_species="All species", records=None):
         control_scale=True
     )
 
-    # Bubble-map sizing: circle AREA is proportional to timber volume (m³).
-    # This makes the visual bubble size communicate the total volume per grume.
-    volume_values = pd.to_numeric(frame["Volume (m³)"], errors="coerce").fillna(0).clip(lower=0)
-    max_volume = float(volume_values.max()) if not volume_values.empty else 0.0
-    min_bubble_radius = 5
-    max_bubble_radius = 34
+    # Bubble AREA is proportional to the total number of grumes in each
+    # Origine/Essence group, not to timber volume.
+    max_count = int(bubble_data["Total grumes"].max()) if not bubble_data.empty else 0
+    min_bubble_radius = 7
+    max_bubble_radius = 38
 
     # Stable, distinct marker colors by Origine (also used in the legend).
     palette = [
@@ -313,35 +326,31 @@ def _render_geo_map(selected_species="All species", records=None):
         "#0891b2", "#be185d", "#4d7c0f", "#9333ea", "#475569",
         "#ea580c", "#0f766e", "#a21caf", "#65a30d", "#1d4ed8"
     ]
-    origins = sorted(frame["Origine"].unique().tolist())
+    origins = sorted(bubble_data["Origine"].unique().tolist())
     origin_colors = {name: palette[i % len(palette)] for i, name in enumerate(origins)}
 
-    for _, row in frame.iterrows():
+    for _, row in bubble_data.iterrows():
         color = origin_colors[row["Origine"]]
-        popup_html = (
-            f"<b>Grume ID:</b> {row['Grume ID']}<br>"
-            f"<b>Essence:</b> {row['Species']}<br>"
-            f"<b>Origine:</b> {row['Origine']}<br>"
-            f"<b>GPS:</b> {row['Coordinates']}<br>"
-            f"<b>Volume:</b> {row['Volume (m³)']}"
-        )
-        # Scale bubble AREA proportionally to volume.
-        # Radius therefore follows sqrt(volume / maximum volume), as in a
-        # conventional proportional-symbol map.
-        try:
-            volume_value = max(0.0, float(row["Volume (m³)"] or 0))
-        except (TypeError, ValueError):
-            volume_value = 0.0
+        count_value = int(row["Total grumes"])
+        total_volume = float(row["Total volume (m³)"] or 0)
 
-        if max_volume > 0 and volume_value > 0:
+        popup_html = (
+            f"<b>Origine:</b> {row['Origine']}<br>"
+            f"<b>Essence:</b> {row['Species']}<br>"
+            f"<b>Nombre total de grumes:</b> {count_value}<br>"
+            f"<b>Volume total:</b> {total_volume:,.3f} m³<br>"
+            f"<b>Grume IDs:</b> {row['Grume IDs']}"
+        )
+
+        # Proportional-symbol map: bubble AREA is proportional to the
+        # number of grumes in this Origine/Essence group.
+        if max_count > 0 and count_value > 0:
             marker_radius = min_bubble_radius + (
                 (max_bubble_radius - min_bubble_radius)
-                * (volume_value / max_volume) ** 0.5
+                * (count_value / max_count) ** 0.5
             )
         else:
             marker_radius = min_bubble_radius
-
-        volume_label = f"{volume_value:,.3f} m³" if volume_value else "Volume unavailable"
 
         folium.CircleMarker(
             location=[row["Latitude"], row["Longitude"]],
@@ -352,10 +361,10 @@ def _render_geo_map(selected_species="All species", records=None):
             fill_color=color,
             fill_opacity=0.72,
             tooltip=(
-                f"{row['Grume ID']} · {row['Species']} · "
-                f"{row['Origine']} · Volume: {volume_label}"
+                f"{row['Origine']} · {row['Species']} · "
+                f"Total grumes: {count_value}"
             ),
-            popup=folium.Popup(popup_html, max_width=320)
+            popup=folium.Popup(popup_html, max_width=360)
         ).add_to(map_view)
 
     legend_rows = "".join(
@@ -381,7 +390,8 @@ def _render_geo_map(selected_species="All species", records=None):
     geo_status.object = (
         f"Displaying **{len(frame)}** timber GPS point(s). "
         "Marker colors and the map legend represent **Origine**; "
-        "the **Essence** dropdown filters the displayed timber."
+        "bubble size represents the **total number of grumes** for each Essence and Origine; "
+        "the **Essence** dropdown filters the displayed groups."
     )
     geo_status.alert_type = "success"
 
@@ -407,7 +417,7 @@ geo_refresh_btn.on_click(refresh_geo_from_system)
 
 geo_view = pn.Column(
     "## Timber geolocation – Interactive map",
-    "Each marker represents a registered grume. The **Origine** legend identifies the forest origin by color; use the **Essence** dropdown to filter species.",
+    "Each bubble represents the total number of grumes for an Essence within an Origine. Bubble size represents the grume count; the **Origine** legend identifies the forest origin by color. Use the **Essence** dropdown to filter species.",
     pn.Row(species_filter, geo_refresh_btn, sizing_mode="stretch_width"),
     geo_status,
     geo_summary,
