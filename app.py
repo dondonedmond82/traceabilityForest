@@ -166,10 +166,10 @@ register_btn = pn.widgets.Button(name="Register timber", button_type="success")
 register_btn.on_click(register_timber)
 
 
-# Geographic scatter workspace
-# Points use GPS coordinates; color/legend represents forest origin.
+# Geographic map workspace
+# Map markers are colored by forest origin; the Essence dropdown filters species.
 species_filter = pn.widgets.Select(
-    name="Filter by timber species",
+    name="Essence",
     options=["All species"],
     value="All species",
     sizing_mode="stretch_width"
@@ -178,8 +178,9 @@ geo_status = pn.pane.Alert(
     "GPS coordinates will appear here when registered timber records contain valid positions.",
     alert_type="info"
 )
-geo_scatter = pn.Column(
-    pn.pane.Markdown("No GPS data available yet."),
+geo_map = pn.pane.HTML(
+    "<div style='padding:24px;text-align:center;color:#64748b;'>No GPS data available yet.</div>",
+    height=620,
     sizing_mode="stretch_width"
 )
 geo_summary = pn.Row(sizing_mode="stretch_width")
@@ -234,9 +235,12 @@ def refresh_geo_data(records=None):
     current = species_filter.value
     species_filter.options = options
     species_filter.value = current if current in options else "All species"
-    _render_geo_scatter(species_filter.value, records)
+    _render_geo_map(species_filter.value, records)
 
-def _render_geo_scatter(selected_species="All species", records=None):
+def _render_geo_map(selected_species="All species", records=None):
+    import folium
+    from branca.element import Element
+
     if records is None:
         records = _get_timber_records()
 
@@ -249,9 +253,9 @@ def _render_geo_scatter(selected_species="All species", records=None):
             continue
         lat, lon = coords
         valid_rows.append({
-            "Grume ID": record.get("grumeId", record.get("timberId", "Timber")),
+            "Grume ID": str(record.get("grumeId", record.get("timberId", "Timber"))),
             "Species": str(record.get("species", "Unknown")),
-            "Origine": str(record.get("origin", "Unspecified")),
+            "Origine": str(record.get("origin", "Unspecified") or "Unspecified"),
             "Latitude": lat,
             "Longitude": lon,
             "Coordinates": f"{lat:.6f}, {lon:.6f}",
@@ -262,10 +266,10 @@ def _render_geo_scatter(selected_species="All species", records=None):
     if selected_species != "All species" and not frame.empty:
         frame = frame[frame["Species"] == selected_species]
 
+    origins_count = frame["Origine"].nunique() if not frame.empty else 0
     geo_summary.objects = [
-        metric("GPS points displayed", len(frame), "After species filter"),
-        metric("Forest origins", frame["Origine"].nunique() if not frame.empty else 0,
-               "Shown in scatter legend"),
+        metric("GPS points displayed", len(frame), "After Essence filter"),
+        metric("Forest origins", origins_count, "Shown in map legend"),
         metric("Missing GPS", missing_count, "Records without valid coordinates")
     ]
 
@@ -273,38 +277,116 @@ def _render_geo_scatter(selected_species="All species", records=None):
     geo_records_table.value = frame[columns] if not frame.empty else pd.DataFrame(columns=columns)
 
     if frame.empty:
-        geo_scatter.objects = [pn.pane.Markdown(
-            "No valid GPS points match this species filter. Add GPS coordinates to timber records."
-        )]
-        geo_status.object = "No GPS points to plot for the selected species."
+        geo_map.object = (
+            "<div style='padding:28px;text-align:center;color:#64748b;"
+            "border:1px solid #e2e8f0;border-radius:8px;'>"
+            "No valid GPS points match this Essence filter. Add GPS coordinates to timber records."
+            "</div>"
+        )
+        geo_status.object = "No GPS points to display for the selected Essence."
         geo_status.alert_type = "warning"
         return
 
-    plot = frame.hvplot.scatter(
-        x="Longitude",
-        y="Latitude",
-        by="Origine",
-        title="Timber GPS positions by forest origin",
-        xlabel="Longitude",
-        ylabel="Latitude",
-        height=520,
-        responsive=True,
-        size=100,
-        alpha=0.8,
-        legend="right",
-        hover_cols=["Grume ID", "Species", "Origine", "Coordinates", "Volume (m³)"],
-        tools=["hover", "pan", "wheel_zoom", "box_zoom", "reset", "save"],
-        grid=True
+    center = [float(frame["Latitude"].mean()), float(frame["Longitude"].mean())]
+    if len(frame) == 1:
+        zoom = 11
+    else:
+        zoom = 7
+
+    map_view = folium.Map(
+        location=center,
+        zoom_start=zoom,
+        tiles="OpenStreetMap",
+        control_scale=True
     )
-    geo_scatter.objects = [plot]
+
+    # Bubble-map sizing: circle AREA is proportional to timber volume (m³).
+    # This makes the visual bubble size communicate the total volume per grume.
+    volume_values = pd.to_numeric(frame["Volume (m³)"], errors="coerce").fillna(0).clip(lower=0)
+    max_volume = float(volume_values.max()) if not volume_values.empty else 0.0
+    min_bubble_radius = 5
+    max_bubble_radius = 34
+
+    # Stable, distinct marker colors by Origine (also used in the legend).
+    palette = [
+        "#2563eb", "#dc2626", "#059669", "#d97706", "#7c3aed",
+        "#0891b2", "#be185d", "#4d7c0f", "#9333ea", "#475569",
+        "#ea580c", "#0f766e", "#a21caf", "#65a30d", "#1d4ed8"
+    ]
+    origins = sorted(frame["Origine"].unique().tolist())
+    origin_colors = {name: palette[i % len(palette)] for i, name in enumerate(origins)}
+
+    for _, row in frame.iterrows():
+        color = origin_colors[row["Origine"]]
+        popup_html = (
+            f"<b>Grume ID:</b> {row['Grume ID']}<br>"
+            f"<b>Essence:</b> {row['Species']}<br>"
+            f"<b>Origine:</b> {row['Origine']}<br>"
+            f"<b>GPS:</b> {row['Coordinates']}<br>"
+            f"<b>Volume:</b> {row['Volume (m³)']}"
+        )
+        # Scale bubble AREA proportionally to volume.
+        # Radius therefore follows sqrt(volume / maximum volume), as in a
+        # conventional proportional-symbol map.
+        try:
+            volume_value = max(0.0, float(row["Volume (m³)"] or 0))
+        except (TypeError, ValueError):
+            volume_value = 0.0
+
+        if max_volume > 0 and volume_value > 0:
+            marker_radius = min_bubble_radius + (
+                (max_bubble_radius - min_bubble_radius)
+                * (volume_value / max_volume) ** 0.5
+            )
+        else:
+            marker_radius = min_bubble_radius
+
+        volume_label = f"{volume_value:,.3f} m³" if volume_value else "Volume unavailable"
+
+        folium.CircleMarker(
+            location=[row["Latitude"], row["Longitude"]],
+            radius=marker_radius,
+            color=color,
+            weight=2,
+            fill=True,
+            fill_color=color,
+            fill_opacity=0.72,
+            tooltip=(
+                f"{row['Grume ID']} · {row['Species']} · "
+                f"{row['Origine']} · Volume: {volume_label}"
+            ),
+            popup=folium.Popup(popup_html, max_width=320)
+        ).add_to(map_view)
+
+    legend_rows = "".join(
+        f"<div style='display:flex;align-items:center;margin:4px 0;'>"
+        f"<span style='display:inline-block;width:12px;height:12px;border-radius:50%;"
+        f"background:{origin_colors[name]};margin-right:8px;'></span>"
+        f"<span>{name}</span></div>"
+        for name in origins
+    )
+    legend_html = (
+        "<div style='position:fixed;bottom:28px;right:18px;z-index:9999;"
+        "background:white;border:1px solid #cbd5e1;border-radius:6px;"
+        "padding:10px 12px;max-height:220px;overflow-y:auto;"
+        "box-shadow:0 1px 5px rgba(0,0,0,.25);font-size:13px;'>"
+        "<div style='font-weight:700;margin-bottom:6px;'>Origine</div>"
+        f"{legend_rows}</div>"
+    )
+    map_view.get_root().html.add_child(Element(legend_html))
+
+    # Folium's representation is an iframe with an embedded map document,
+    # which Panel can display inside its HTML pane.
+    geo_map.object = map_view.get_root()._repr_html_()
     geo_status.object = (
-        f"Displaying **{len(frame)}** GPS point(s). "
-        f"Legend colors represent **Origine**; the dropdown filters by **Species**."
+        f"Displaying **{len(frame)}** timber GPS point(s). "
+        "Marker colors and the map legend represent **Origine**; "
+        "the **Essence** dropdown filters the displayed timber."
     )
     geo_status.alert_type = "success"
 
 def _species_changed(event):
-    _render_geo_scatter(event.new)
+    _render_geo_map(event.new)
 
 species_filter.param.watch(_species_changed, "value")
 
@@ -324,12 +406,12 @@ def refresh_geo_from_system(event=None):
 geo_refresh_btn.on_click(refresh_geo_from_system)
 
 geo_view = pn.Column(
-    "## Timber geolocation – Scatter plot",
-    "Each point represents a registered grume. The legend identifies its forest origin; use the dropdown to filter timber species.",
+    "## Timber geolocation – Interactive map",
+    "Each marker represents a registered grume. The **Origine** legend identifies the forest origin by color; use the **Essence** dropdown to filter species.",
     pn.Row(species_filter, geo_refresh_btn, sizing_mode="stretch_width"),
     geo_status,
     geo_summary,
-    geo_scatter,
+    geo_map,
     pn.pane.Markdown("### GPS coordinates by timber record"),
     geo_records_table,
     sizing_mode="stretch_width"
@@ -587,7 +669,7 @@ register_view = pn.Column("## Register timber", "Create a unique timber identity
                           pn.pane.Markdown("### Timber dimensions and automatic volume calculation"),
                           pn.Row(diameter_cm, length_m), volume,
                            pn.Row(harvest_date, origin),
-                           pn.pane.Markdown("### GPS position for the scatter plot"),
+                           pn.pane.Markdown("### GPS position for the geolocation map"),
                            pn.Row(gps, gps_btn), gps_note, register_btn, register_msg,
                           pn.pane.Markdown("---"),
                           pn.pane.Markdown("### Import timber records from Excel"),
