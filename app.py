@@ -67,9 +67,7 @@ def refresh_dashboard():
         "Nonce": b.get("nonce")
     } for b in blocks])
     timber_table.value = pd.DataFrame(items)
-    refresh_geo_origins(items)
-    if geo_origin.value != "Select an origin":
-        _render_origin_map(geo_origin.value)
+    refresh_geo_data(items)
     if blocks:
         df = pd.DataFrame([{"Block": b.get("index"), "Transactions": len(b.get("transactions", []))} for b in blocks])
         chart_area.objects = [df.hvplot.bar(x="Block", y="Transactions", height=280,
@@ -100,11 +98,15 @@ length_m.param.watch(update_volume, "value")
 update_volume()
 
 harvest_date = pn.widgets.DatePicker(name="Harvest date", value=datetime.now().date())
-origin = pn.widgets.Select(name="Forest origin / concession", options=[
+origin = pn.widgets.Select(name="Forest zone / concession", options=[
     "Lobaye", "Berberati", "Sangha-Mbaéré", "Mambéré-Kadéï",
     "Ombella-M'Poko", "Nana-Mambéré", "Other"
 ], value="Lobaye")
-gps = pn.widgets.TextInput(name="GPS coordinates", placeholder="Click 'Get my location' to capture latitude, longitude")
+
+gps = pn.widgets.TextInput(
+    name="GPS coordinates (latitude, longitude)",
+    placeholder="e.g. 4.123456, 18.123456"
+)
 gps_btn = pn.widgets.Button(name="Get my location", button_type="primary", icon="map-pin")
 gps_btn.js_on_click(args={"gps": gps}, code="""
 if (!navigator.geolocation) {
@@ -129,9 +131,8 @@ if (!navigator.geolocation) {
 }
 """)
 gps_note = pn.pane.Markdown(
-    "<small>GPS requires browser permission. It works on localhost or on a secure HTTPS website.</small>"
+    "<small>GPS capture requires browser permission and localhost or HTTPS.</small>"
 )
-
 # Timber registration
 register_msg = pn.pane.Alert("", visible=False)
 
@@ -151,7 +152,7 @@ def register_timber(event):
             "lengthM": length_m.value,
             "harvestDate": harvest_date.value.strftime("%d-%m-%Y"),
             "origin": origin.value,
-            "gps": gps.value
+            "gps": gps.value.strip()
         })
 
     register_msg.object = json.dumps(result, ensure_ascii=False, indent=2)
@@ -165,60 +166,32 @@ register_btn = pn.widgets.Button(name="Register timber", button_type="success")
 register_btn.on_click(register_timber)
 
 
-# Dedicated geolocation workspace
-# The origin list and coordinates are loaded from registered timber records
-# returned by the blockchain API (/timber).
-geo_origin = pn.widgets.Select(
-    name="Origine forestière",
-    options=["Select an origin"],
-    value="Select an origin",
+# Geographic scatter workspace
+# Points use GPS coordinates; color/legend represents forest origin.
+species_filter = pn.widgets.Select(
+    name="Filter by timber species",
+    options=["All species"],
+    value="All species",
     sizing_mode="stretch_width"
 )
 geo_status = pn.pane.Alert(
-    "Select an origin to display its registered GPS locations.",
+    "GPS coordinates will appear here when registered timber records contain valid positions.",
     alert_type="info"
 )
-geo_map = pn.pane.HTML(
-    "<div style='padding:22px;border:1px solid #d8dee5;border-radius:10px;"
-    "background:#f8fafc;color:#475569;text-align:center'>"
-    "The map for the selected origin will appear here.</div>",
-    height=470,
+geo_scatter = pn.Column(
+    pn.pane.Markdown("No GPS data available yet."),
     sizing_mode="stretch_width"
 )
+geo_summary = pn.Row(sizing_mode="stretch_width")
 geo_records_table = pn.widgets.Tabulator(
-    pd.DataFrame(columns=["Grume ID", "Species", "Latitude", "Longitude"]),
+    pd.DataFrame(columns=[
+        "Grume ID", "Species", "Origine", "Latitude", "Longitude", "Coordinates"
+    ]),
     pagination="local",
-    page_size=8,
-    height=250
+    page_size=12,
+    height=340,
+    sizing_mode="stretch_width"
 )
-
-def _record_coordinates(record):
-    """Read coordinates from the system record, supporting common field names."""
-    gps_value = record.get("gps") or record.get("coordinates") or record.get("gpsCoordinates")
-    lat_value = record.get("latitude", record.get("lat"))
-    lon_value = record.get("longitude", record.get("lon", record.get("lng")))
-
-    # Prefer explicit numeric latitude/longitude fields when both exist.
-    try:
-        if lat_value not in (None, "") and lon_value not in (None, ""):
-            lat, lon = float(lat_value), float(lon_value)
-        else:
-            if isinstance(gps_value, dict):
-                lat = float(gps_value.get("latitude", gps_value.get("lat")))
-                lon = float(gps_value.get("longitude", gps_value.get("lon", gps_value.get("lng"))))
-            elif isinstance(gps_value, (list, tuple)) and len(gps_value) >= 2:
-                lat, lon = float(gps_value[0]), float(gps_value[1])
-            else:
-                # Stored text format: "latitude, longitude"
-                parts = [p.strip() for p in str(gps_value or "").replace(";", ",").split(",")]
-                if len(parts) < 2:
-                    return None
-                lat, lon = float(parts[0]), float(parts[1])
-        if -90 <= lat <= 90 and -180 <= lon <= 180:
-            return round(lat, 6), round(lon, 6)
-    except (TypeError, ValueError):
-        return None
-    return None
 
 def _get_timber_records():
     response = api_get("/timber")
@@ -227,153 +200,138 @@ def _get_timber_records():
         return records if isinstance(records, list) else []
     return []
 
-def _records_for_origin(origin_name):
-    records = _get_timber_records()
-    selected = []
-    for record in records:
-        record_origin = str(record.get("origin", "")).strip()
-        coords = _record_coordinates(record)
-        if record_origin == origin_name and coords:
-            selected.append((record, coords))
-    return selected
+def _record_coordinates(record):
+    gps_value = record.get("gps") or record.get("coordinates") or record.get("gpsCoordinates")
+    lat_value = record.get("latitude", record.get("lat"))
+    lon_value = record.get("longitude", record.get("lon", record.get("lng")))
+    try:
+        if lat_value not in (None, "") and lon_value not in (None, ""):
+            lat, lon = float(lat_value), float(lon_value)
+        elif isinstance(gps_value, dict):
+            lat = float(gps_value.get("latitude", gps_value.get("lat")))
+            lon = float(gps_value.get("longitude", gps_value.get("lon", gps_value.get("lng"))))
+        elif isinstance(gps_value, (list, tuple)) and len(gps_value) >= 2:
+            lat, lon = float(gps_value[0]), float(gps_value[1])
+        else:
+            parts = [p.strip() for p in str(gps_value or "").replace(";", ",").split(",")]
+            if len(parts) < 2:
+                return None
+            lat, lon = float(parts[0]), float(parts[1])
+        if -90 <= lat <= 90 and -180 <= lon <= 180:
+            return round(lat, 6), round(lon, 6)
+    except (TypeError, ValueError):
+        return None
+    return None
 
-def _render_origin_map(origin_name):
-    if not origin_name or origin_name == "Select an origin":
-        geo_status.object = "Select an origin to display its registered GPS locations."
-        geo_status.alert_type = "info"
-        geo_map.object = (
-            "<div style='padding:22px;border:1px solid #d8dee5;border-radius:10px;"
-            "background:#f8fafc;color:#475569;text-align:center'>"
-            "Choose an origin from the dropdown above.</div>"
-        )
-        geo_records_table.value = pd.DataFrame(
-            columns=["Grume ID", "Species", "Latitude", "Longitude"]
-        )
-        return
-
-    matched = _records_for_origin(origin_name)
-    if not matched:
-        geo_status.object = (
-            f"No registered GPS coordinates were found for **{origin_name}**. "
-            "Check that timber records for this origin contain valid latitude and longitude."
-        )
-        geo_status.alert_type = "warning"
-        geo_map.object = (
-            "<div style='padding:22px;border:1px solid #d8dee5;border-radius:10px;"
-            "background:#f8fafc;color:#475569;text-align:center'>"
-            "No GPS coordinates are available for this origin.</div>"
-        )
-        geo_records_table.value = pd.DataFrame(
-            columns=["Grume ID", "Species", "Latitude", "Longitude"]
-        )
-        return
-
-    rows = []
-    markers = []
-    for record, (lat, lon) in matched:
-        grume = str(record.get("grumeId", record.get("timberId", "Timber")))
-        species_name = str(record.get("species", ""))
-        rows.append({
-            "Grume ID": grume,
-            "Species": species_name,
-            "Latitude": lat,
-            "Longitude": lon
-        })
-        markers.append(
-            f"<div class='marker' style='--lat:{lat};--lon:{lon}' "
-            f"title='{grume} · {species_name}'></div>"
-        )
-
-    # Fit the map to all recorded GPS points for the selected origin.
-    lats = [coords[0] for _, coords in matched]
-    lons = [coords[1] for _, coords in matched]
-    south, north = min(lats), max(lats)
-    west, east = min(lons), max(lons)
-    lat_pad = max((north - south) * 0.15, 0.01)
-    lon_pad = max((east - west) * 0.15, 0.01)
-    bbox = f"{west-lon_pad}%2C{south-lat_pad}%2C{east+lon_pad}%2C{north+lat_pad}"
-
-    # OpenStreetMap displays the selected origin area; markers are shown
-    # individually using a Leaflet map when multiple records exist.
-    center_lat = sum(lats) / len(lats)
-    center_lon = sum(lons) / len(lons)
-    # OpenStreetMap's export iframe accepts one marker. Use the centre of
-    # the selected origin's registered GPS points; the table below lists every
-    # individual timber coordinate.
-    map_url = (
-        "https://www.openstreetmap.org/export/embed.html?bbox=" + bbox
-        + f"&layer=mapnik&marker={center_lat}%2C{center_lon}"
-    )
-    geo_map.object = (
-        "<iframe title='Timber GPS locations for " + origin_name.replace("'", "&#39;") +
-        "' width='100%' height='450' frameborder='0' scrolling='no' "
-        "marginheight='0' marginwidth='0' src='" + map_url +
-        "' style='border:0;border-radius:8px'></iframe>"
-    )
-    geo_status.object = (
-        f"**{origin_name}** · {len(matched)} registered timber record(s) with GPS coordinates. "
-        f"Map centre: {center_lat:.6f}, {center_lon:.6f}"
-    )
-    geo_status.alert_type = "success"
-    geo_records_table.value = pd.DataFrame(rows)
-
-def _origin_changed(event):
-    _render_origin_map(event.new)
-
-geo_origin.param.watch(_origin_changed, "value")
-
-def refresh_geo_origins(records=None):
+def refresh_geo_data(records=None):
     if records is None:
         records = _get_timber_records()
-    available = sorted({
-        str(record.get("origin", "")).strip()
-        for record in records
-        if str(record.get("origin", "")).strip()
+    species_values = sorted({
+        str(record.get("species", "")).strip()
+        for record in records if str(record.get("species", "")).strip()
     })
-    options = ["Select an origin"] + available
-    current = geo_origin.value
-    geo_origin.options = options
-    geo_origin.value = current if current in options else "Select an origin"
+    options = ["All species"] + species_values
+    current = species_filter.value
+    species_filter.options = options
+    species_filter.value = current if current in options else "All species"
+    _render_geo_scatter(species_filter.value, records)
+
+def _render_geo_scatter(selected_species="All species", records=None):
+    if records is None:
+        records = _get_timber_records()
+
+    valid_rows = []
+    missing_count = 0
+    for record in records:
+        coords = _record_coordinates(record)
+        if coords is None:
+            missing_count += 1
+            continue
+        lat, lon = coords
+        valid_rows.append({
+            "Grume ID": record.get("grumeId", record.get("timberId", "Timber")),
+            "Species": str(record.get("species", "Unknown")),
+            "Origine": str(record.get("origin", "Unspecified")),
+            "Latitude": lat,
+            "Longitude": lon,
+            "Coordinates": f"{lat:.6f}, {lon:.6f}",
+            "Volume (m³)": record.get("volumeM3", "")
+        })
+
+    frame = pd.DataFrame(valid_rows)
+    if selected_species != "All species" and not frame.empty:
+        frame = frame[frame["Species"] == selected_species]
+
+    geo_summary.objects = [
+        metric("GPS points displayed", len(frame), "After species filter"),
+        metric("Forest origins", frame["Origine"].nunique() if not frame.empty else 0,
+               "Shown in scatter legend"),
+        metric("Missing GPS", missing_count, "Records without valid coordinates")
+    ]
+
+    columns = ["Grume ID", "Species", "Origine", "Latitude", "Longitude", "Coordinates"]
+    geo_records_table.value = frame[columns] if not frame.empty else pd.DataFrame(columns=columns)
+
+    if frame.empty:
+        geo_scatter.objects = [pn.pane.Markdown(
+            "No valid GPS points match this species filter. Add GPS coordinates to timber records."
+        )]
+        geo_status.object = "No GPS points to plot for the selected species."
+        geo_status.alert_type = "warning"
+        return
+
+    plot = frame.hvplot.scatter(
+        x="Longitude",
+        y="Latitude",
+        by="Origine",
+        title="Timber GPS positions by forest origin",
+        xlabel="Longitude",
+        ylabel="Latitude",
+        height=520,
+        responsive=True,
+        size=100,
+        alpha=0.8,
+        legend="right",
+        hover_cols=["Grume ID", "Species", "Origine", "Coordinates", "Volume (m³)"],
+        tools=["hover", "pan", "wheel_zoom", "box_zoom", "reset", "save"],
+        grid=True
+    )
+    geo_scatter.objects = [plot]
+    geo_status.object = (
+        f"Displaying **{len(frame)}** GPS point(s). "
+        f"Legend colors represent **Origine**; the dropdown filters by **Species**."
+    )
+    geo_status.alert_type = "success"
+
+def _species_changed(event):
+    _render_geo_scatter(event.new)
+
+species_filter.param.watch(_species_changed, "value")
 
 geo_refresh_btn = pn.widgets.Button(
-    name="Refresh origins from system data",
+    name="Refresh GPS data",
     button_type="primary",
     icon="refresh"
 )
 
 def refresh_geo_from_system(event=None):
     records = _get_timber_records()
-    refresh_geo_origins(records)
-    if geo_origin.value != "Select an origin":
-        _render_origin_map(geo_origin.value)
-    elif not records:
-        geo_status.object = (
-            "The blockchain API did not return registered timber records. "
-            "Connect the API and register timber with origin and GPS coordinates."
-        )
+    refresh_geo_data(records)
+    if not records:
+        geo_status.object = "No timber records were returned by the blockchain API."
         geo_status.alert_type = "warning"
-    else:
-        geo_status.object = (
-            "Origins were loaded, but no origin is selected yet. "
-            "Choose one from the dropdown."
-        )
-        geo_status.alert_type = "info"
 
 geo_refresh_btn.on_click(refresh_geo_from_system)
 
 geo_view = pn.Column(
-    "## Geolocalisation",
-    "Choose a forest origin to view the GPS positions recorded in the blockchain system.",
-    pn.Row(geo_origin, geo_refresh_btn, sizing_mode="stretch_width"),
+    "## Timber geolocation – Scatter plot",
+    "Each point represents a registered grume. The legend identifies its forest origin; use the dropdown to filter timber species.",
+    pn.Row(species_filter, geo_refresh_btn, sizing_mode="stretch_width"),
     geo_status,
-    geo_map,
-    pn.pane.Markdown("### Timber records and coordinates for the selected origin"),
+    geo_summary,
+    geo_scatter,
+    pn.pane.Markdown("### GPS coordinates by timber record"),
     geo_records_table,
-    pn.pane.Markdown(
-        "<small>Origin choices and GPS coordinates are read dynamically from registered "
-        "timber records in the blockchain API. Records without valid GPS coordinates "
-        "are not plotted. The map uses OpenStreetMap and requires an internet connection.</small>"
-    ),
     sizing_mode="stretch_width"
 )
 
@@ -531,8 +489,8 @@ def create_timber_excel_template():
                 "Log length in metres",
                 "Volume in cubic metres; optional if diameterCm and lengthM are supplied",
                 "Harvest date (dd-mm-yyyy recommended)",
-                "Forest origin / concession",
-                "Latitude, longitude"
+                "Forest zone / concession",
+                "GPS coordinates as latitude, longitude"
             ]
         }).to_excel(writer, index=False, sheet_name="Instructions")
     output.seek(0)
@@ -628,8 +586,9 @@ register_view = pn.Column("## Register timber", "Create a unique timber identity
                           grume_id, species,
                           pn.pane.Markdown("### Timber dimensions and automatic volume calculation"),
                           pn.Row(diameter_cm, length_m), volume,
-                          pn.Row(harvest_date, origin), pn.pane.Markdown("### GPS geolocation"),
-                          pn.Row(gps, gps_btn), gps_note, register_btn, register_msg,
+                           pn.Row(harvest_date, origin),
+                           pn.pane.Markdown("### GPS position for the scatter plot"),
+                           pn.Row(gps, gps_btn), gps_note, register_btn, register_msg,
                           pn.pane.Markdown("---"),
                           pn.pane.Markdown("### Import timber records from Excel"),
                           pn.pane.Markdown(
