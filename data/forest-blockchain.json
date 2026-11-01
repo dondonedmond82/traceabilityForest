@@ -104053,6 +104053,25 @@
       "previousHash": "81b11deb6cc5046d54e43587253beb4867112c06829a8b2fe9016e6852b16825",
       "nonce": 0,
       "hash": "fe2791dd7f512a3ddc930f87a96eb22d5e9d6522e4450e14c974323aa4b5e044"
+    },
+    {
+      "index": 4006,
+      "timestamp": "2026-11-01T19:08:27.622Z",
+      "transactions": [
+        {
+          "id": "2cb9492c-cdf0-4fc1-8fca-3cf744a5e77f",
+          "type": "TRACEABILITY_EVENT",
+          "grumeId": "RCA-LOB-2026-0999",
+          "eventType": "HARVEST",
+          "actor": "",
+          "location": "",
+          "notes": "",
+          "timestamp": "2026-11-01T19:08:27.622Z"
+        }
+      ],
+      "previousHash": "fe2791dd7f512a3ddc930f87a96eb22d5e9d6522e4450e14c974323aa4b5e044",
+      "nonce": 0,
+      "hash": "9914bad6a7554312e4e3fdc25628213e62216a06e92a014f9a9634c6b527f7e3"
     }
   ],
   "pendingTransactions": [],
