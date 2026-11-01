@@ -10,7 +10,7 @@ const PORT = Number(process.env.PORT || 3000);
 const API_KEY = process.env.API_KEY || "dev-change-this-key";
 const DATA_DIR = path.join(__dirname, "data");
 const LEDGER_FILE = path.join(DATA_DIR, "forest-blockchain.json");
-fs.mkdirSync(DATA_DIR, { recursive: true });
+fs.mkdirSync(DATA_DIR, { recursive: true });  
 
 const sha256 = value => crypto.createHash("sha256").update(value).digest("hex");
 const now = () => new Date().toISOString();

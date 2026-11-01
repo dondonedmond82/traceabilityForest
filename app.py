@@ -33,9 +33,9 @@ def metric(title, value, note=""):
 
 status = pn.pane.Alert("Connecting to blockchain API…", alert_type="info")
 kpi_row = pn.Row(sizing_mode="stretch_width")
-chain_table = pn.widgets.Tabulator(pd.DataFrame(), pagination="local", page_size=10, height=360)
-timber_table = pn.widgets.Tabulator(pd.DataFrame(), pagination="local", page_size=10, height=360)
-history_table = pn.widgets.Tabulator(pd.DataFrame(), pagination="local", page_size=10, height=300)
+chain_table = pn.widgets.Tabulator(pd.DataFrame(), pagination="local", page_size=15, height=360)
+timber_table = pn.widgets.Tabulator(pd.DataFrame(), pagination="local", page_size=15, height=360)
+history_table = pn.widgets.Tabulator(pd.DataFrame(), pagination="local", page_size=15, height=300)
 explorer = pn.Column()
 verify_result = pn.pane.Alert("Run ledger verification to inspect chain integrity.", alert_type="light")
 chart_area = pn.Column()
